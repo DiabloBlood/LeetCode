@@ -33,6 +33,18 @@ Output: true
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+
+/*
+* Case Analysis:
+* 1. stack.isEmpty() && c in ['(', '[', '{'], stack.push(c)
+* 2. !stack.isEmpty() && c in ['(', '[', '{'], stack.push(c)    Example: ((()))
+* 3. stack.isEmpty() && c in [')', ']', '}'], return false
+* 4. !stack.isEmpty() && c in [')', ']', '}'] && isMatch(stack.peek(), c)), stack.pop()
+* 5. !stack.isEmpty() && c in [')', ']', '}'] && !isMatch(stack.peek(), c)), return false not match only because (] mismatch
+*/
+
+
+
 public class Solution20 {
 
     public boolean isValid(String s) {
