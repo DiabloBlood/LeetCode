@@ -29,7 +29,7 @@ It doesn't matter what values are set beyond the returned length.
 
 /*
 * 1. 0 -> end - 1 is valid, which means array[0] - array[end - 1] is not val
-* 2. if nums[i] != nums[end - 1], which means found next valid number
+* 2. if nums[i] != val, which means found next valid number
 * 3. end should be return length
 */
 
