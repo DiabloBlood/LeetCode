@@ -18,16 +18,20 @@ Output:
 public class Solution46 {
 
     public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
+        List<List<Integer>> result = new LinkedList<>();
         if (nums == null) {
             return result;
         }
-        List<Integer> list = new LinkedList<>();
+        result.add(new LinkedList<>());
         for (int i = 0; i < nums.length; i++) {
             int size = result.size();
             for (int j = 0; j < size; j++) {
-                List<Integer> list = new LinkedList<>(result.get(j));
-                list.add(j, nums[i])
+                List<Integer> tempList = result.remove(0);
+                for (int k = 0; k <= i; k++) {
+                    List<Integer> list = new LinkedList<>(tempList);
+                    list.add(k, nums[i]);
+                    result.add(list);
+                }
             }
         }
         return result;
