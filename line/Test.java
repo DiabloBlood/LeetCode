@@ -1,3 +1,10 @@
+import java.util.Arrays;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Collection;
+import java.util.Iterator;
+
 
 
 
@@ -23,9 +30,35 @@ public class Test {
         return prev.toString();
     }
 
+    public int lengthOfLongestSubstring(String s) {
+        if (s == null) {
+            return 0;
+        }
+        final int notFound = -1;
+        int[] map = new int[128];
+        Arrays.fill(map, notFound);
+
+        int start = 0;
+        int max = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (map[c] != notFound && start < map[c]) {
+                start = map[c] + 1;
+            }
+            map[c] = i;
+            max = Integer.max(i - start + 1, max);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         Test test = new Test();
-        String result = test.countAndSay(20);
-        System.out.println(result);
+        //String result = test.countAndSay(20);
+        //int result = test.lengthOfLongestSubstring("abba");
+        //System.out.println(result);
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(1, 1);
+        System.out.println(map.values() instanceof Iterator);
     }
 }
