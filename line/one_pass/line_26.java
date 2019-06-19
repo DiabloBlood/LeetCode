@@ -39,10 +39,13 @@ public class Solution26 {
         int end = 1;
         for (int i = 1; i < nums.length; i++) {
             if (nums[i] > nums[end - 1]) {
-                nums[end] = nums[i];
-                end++;
+                nums[end++] = nums[i];
             }
         }
         return end;
     }
 }
+
+
+
+

@@ -1,8 +1,4 @@
-
-
-
 // bubble sort is stable sort
-
 // O(n^2 / 2)
 public class BubbleSort {
 
@@ -34,11 +30,10 @@ public class BubbleSort {
         }
     }
 
-
     public void swap(int[] nums, int p, int q) {
-        int tmp = nums[p];
+        int temp = nums[p];
         nums[p] = nums[q];
-        nums[q] = tmp; 
+        nums[q] = temp; 
     }
 
     public static void main(String[] args) {

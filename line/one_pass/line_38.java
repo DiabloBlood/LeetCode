@@ -29,23 +29,35 @@ Output: "1211"
 
 public class Solution38 {
 
+    /*
+     * Time:  O(n*m), maybe exponential time (c ^ n), c is small! See the Test.java, testing code
+     * Space: O(m)
+     *
+     */
+
     public String countAndSay(int n) {
         if (n < 1) {
             throw new IllegalArgumentException();
         }
-        StringBuilder prev = new StringBuilder("1");
+        StringBuilder sb = new StringBuilder("1");
         for (int i = 2; i <= n; i++) {
             StringBuilder cur = new StringBuilder();
             int start = 0;
-            int prevLen = prev.length();
-            for (int j = 0; j <= prevLen; j++) {
-                if (j == prevLen || prev.charAt(j) != prev.charAt(start)) {
-                    cur.append(j - start).append(prev.charAt(start));
+            int len = sb.length();
+            for (int j = 0; j <= len; j++) {
+                if (j == len || sb.charAt(j) != sb.charAt(start)) {
+                    cur.append(j - start).append(sb.charAt(start));
                     start = j;
                 }
             }
-            prev = cur;
+            sb = cur;
         }
-        return prev.toString();
+        return sb.toString();
     }
 }
+
+
+
+
+
+

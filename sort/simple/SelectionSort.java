@@ -1,22 +1,23 @@
 
 
 
-// O(n^2 / 2) better than bubble sort, since only swap one time 
+// O(n^2 / 2) better than bubble sort, since only swap one time
+// Selection sort is not stable, [5, 8, 5, 2, 9]
 public class SelectionSort {
 
     public void SelectionSort(int[] nums) {
         if(nums == null) {
             return;
         }
-        int n = nums.length;
-        for(int i = 0; i < n - 1; i++) {
-            int smallest = i;
-            for(int j = i + 1; j < n; j++) {
-                if(nums[j] < nums[smallest]) {
-                    smallest = j;
+        int len = nums.length;
+        for(int i = 0; i < len - 1; i++) {
+            int smallestIndex = i;
+            for(int j = i + 1; j < len - 1; j++) {
+                if(nums[j] < nums[smallestIndex]) {
+                    smallestIndex = j;
                 }
             }
-            swap(nums, smallest, i);
+            swap(nums, smallestIndex, i);
         }
     }
 

@@ -24,12 +24,36 @@ Could you do it in-place with O(1) extra space?
 
 public class Solution189 {
 
+    // Stupid and trivial solution
+    /*
+    * Time complexity: O(nk)
+    * Space complexity: O(1)
+    */
+    public void rotate3(int[] nums, int k) {
+        if (nums == null || nums.length == 0 || k < 0) {
+            return;
+        }
+        int len = nums.length;
+        for (int i = 0; i < k; i++) {
+            int temp = nums[len - 1];
+            for (int j = len - 1; j >= 1; j--) {
+                nums[j] = nums[j - 1];
+            }
+            nums[0] = temp;
+        }
+    }
+
     //leet code has cases that k large than nums.length
+    /*
+    * Time complexity: O(n)
+    * Space complexity: O(n)
+    */
     public void rotate2(int[] nums, int k) {
         if (nums == null || nums.length == 0 || k < 0) {
             return;
         }
         int len = nums.length;
+        // if k is integer multiple of len, the array seems like not shift
         k = k % len;
         if ( k == 0) {
             return;
@@ -78,3 +102,7 @@ public class Solution189 {
         nums[q] = temp;
     }
 }
+
+
+
+

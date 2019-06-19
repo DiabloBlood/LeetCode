@@ -21,7 +21,7 @@ public class Solution1 {
     // O(n)
     public int[] twoSum(int[] nums, int target) {
         int[] result = new int[] {-1, -1};
-        if (nums == null || nums.length < 2) {
+        if (nums == null) {
             return result;
         }
         Map<Integer, Integer> map = new HashMap<>();
@@ -40,15 +40,12 @@ public class Solution1 {
     // O (n^2) algorithm 
     public int[] twoSum2(int[] nums, int target) {
         int[] result = new int[] {-1, -1};
-        if (nums == null || nums.length < 2) {
+        if (nums == null) {
             return result;
         }
-        int n = nums.length;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (j == i) {
-                    continue;
-                }
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
                 if (nums[i] + nums[j] == target) {
                     result[0] = i;
                     result[1] = j;
@@ -59,3 +56,8 @@ public class Solution1 {
         return result;
     }
 }
+
+
+
+
+

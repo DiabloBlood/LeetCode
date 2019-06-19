@@ -54,11 +54,30 @@ public class Test {
 
     public static void main(String[] args) {
         Test test = new Test();
-        //String result = test.countAndSay(20);
-        //int result = test.lengthOfLongestSubstring("abba");
-        //System.out.println(result);
-        Map<Integer, Integer> map = new HashMap<>();
-        map.put(1, 1);
-        System.out.println(map.values() instanceof Iterator);
+        int prev = 0;
+        for (int i = 1; i <= 50; i++) {
+            String cur = test.countAndSay(i);
+            int curLen = cur.length();
+            System.out.print(String.valueOf(curLen) + ", " + String.valueOf(curLen - prev));
+            System.out.println();
+            prev = curLen;
+        }
+        // int result = test.lengthOfLongestSubstring("abba");
+        // System.out.println(result);
+        // Map<Integer, Integer> map = new HashMap<>();
+        // map.put(1, 1);
+        // System.out.println(map.values() instanceof Iterator);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+

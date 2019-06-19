@@ -71,4 +71,43 @@ public class Solution20 {
     private isMatch(char p, char q) {
         return p == '(' && q == ')' || p == '[' && q == ']' || p == '{' && q == '}'; 
     }
+
+    // Suppose s only have '(' and ')'
+    /*
+    * Case Analysis:
+    * 1. stack.isEmpty() && c == '('; stack.push(c);
+    * 2. !stack.isEmpty() && c == '('; stack.push(c);    Example: ((()))
+    * 3. stack.isEmpty() && c == ')'; return false;
+    * 4. !stack.isEmpty() && c == ')'; stack.pop()
+    */
+    public boolean isValid2(String s) {
+        if (s == null) {
+            return false;
+        }
+
+        Deque<Character> stack = new ArrayDeque<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '(') {
+                stack.push(c);
+            } else if (!stack.isEmpty()) {
+                stack.pop();
+            } else {
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
