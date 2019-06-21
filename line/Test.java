@@ -52,16 +52,38 @@ public class Test {
         return max;
     }
 
+    public boolean isIsomorphic(String s, String t) {
+        if (s == null || t == null || s.length() == t.length()) {
+            return false;
+        }
+        int[] mapS = new int[128];
+        int[] mapT = new int[128];
+        
+        Arrays.fill(mapS, -1);
+        Arrays.fill(mapT, -1);
+        
+        for (int i = 0; i < s.length(); i++) {
+            if(mapS[s.charAt(i)] != mapT[t.charAt(i)]) {
+                System.out.println(mapS[s.charAt(i)]);
+                System.out.println(mapS[t.charAt(i)]);
+                return false;
+            }
+            mapS[s.charAt(i)] = i;
+            mapT[t.charAt(i)] = i;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         Test test = new Test();
-        int prev = 0;
-        for (int i = 1; i <= 50; i++) {
-            String cur = test.countAndSay(i);
-            int curLen = cur.length();
-            System.out.print(String.valueOf(curLen) + ", " + String.valueOf(curLen - prev));
-            System.out.println();
-            prev = curLen;
-        }
+        System.out.println(test.isIsomorphic("egg", "add"));
+        // for (int i = 1; i <= 50; i++) {
+        //     String cur = test.countAndSay(i);
+        //     int curLen = cur.length();
+        //     System.out.print(String.valueOf(curLen) + ", " + String.valueOf(curLen - prev));
+        //     System.out.println();
+        //     prev = curLen;
+        // }
         // int result = test.lengthOfLongestSubstring("abba");
         // System.out.println(result);
         // Map<Integer, Integer> map = new HashMap<>();

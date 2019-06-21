@@ -17,7 +17,7 @@ public class Solution49 {
     /*
     * Assume `m` is the average length of s, `n` is the length of string array `strs`
     * Time Complexity: O((128 + m)*n), since the counting sort is O(m)
-    * Space Complexity: O(m), for StringBuilder usage
+    * Space Complexity: O(128 + m), for StringBuilder usage
     */
     public List<List<String>> groupAnagrams(String[] strs) {
         if (strs == null) {
@@ -44,7 +44,8 @@ public class Solution49 {
         }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[i]; j++) {
+            int count = map[i];
+            for (int j = 0; j < count; j++) {
                 sb.append(i);
             }
         }
@@ -73,3 +74,12 @@ public class Solution49 {
         return new ArrayList<>(map.values());
     }
 }
+
+
+
+
+
+
+
+
+
