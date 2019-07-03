@@ -1,7 +1,7 @@
 
 
 
-class Solution {
+class Solution234 {
     /*
      * Time:  O(n), findMid O(n/2), reverse O(n/2), check avg O(n/2)
      * Space: O(1)

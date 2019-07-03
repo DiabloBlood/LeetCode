@@ -1,7 +1,7 @@
 
 
 
-class Solution {
+class Solution206 {
     /*
      * Iterative method
      * Time:  O(n)

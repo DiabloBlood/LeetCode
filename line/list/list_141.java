@@ -1,12 +1,12 @@
 
 
 
-public class Solution {
+public class Solution141 {
     /*
      * Proof:
      * Assume: index of circle, 1 <= i <= X, `X` is the circle size.
      *         when slow enter the circle, slow index is `s`, fast index is `f`,
-     *         ffter `k` steps, s == f,
+     *         after `k` steps, s == f,
      *         we need to prove that there has the solution of integer k to make (s + k) % X == (s + 2k) % X valid.
      *         => s +  k == a * X + c
      *            f + 2k == b * X + c
@@ -26,20 +26,6 @@ public class Solution {
         ListNode slow = head;
         ListNode fast = head;
         while(fast.next != null && fast.next.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-            if (slow == fast) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // Deal with head == null
-    public boolean hasCycle(ListNode head) {
-        ListNode slow = head;
-        ListNode fast = head;
-        while(fast != null && fast.next!= null) {
             slow = slow.next;
             fast = fast.next.next;
             if (slow == fast) {
