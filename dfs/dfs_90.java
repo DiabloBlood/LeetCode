@@ -1,48 +1,58 @@
-/*
-Given a collection of integers that might contain duplicates, nums, return all possible subsets (the power set).
 
-Note: The solution set must not contain duplicate subsets.
-
-Example:
-
-Input: [1,2,2]
-Output:
-[
-  [2],
-  [1],
-  [1,2,2],
-  [2,2],
-  [1,2],
-  []
-]
-*/
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Solution90 {
-
+    /**
+     * Time:
+     *     Worst: no duplicate elements, O(n*2^n), n * 2^(n-1) elements
+     *     Best:  all elements is duplicate, O(n^2)
+     * Space: O(1)
+     */
     public List<List<Integer>> subsetsWithDup(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
         if (nums == null) {
-            return result;
+            return new ArrayList<>();
         }
         Arrays.sort(nums);
-        helper(nums, new ArrayList<>(), result, 0);
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(new ArrayList<>());
+        int prevSize = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int start = i > 0 && nums[i] == nums[i-1] ? prevSize : 0;
+            int size = result.size();
+            for (int j = start; j < size; j++) {
+                List<Integer> list = new ArrayList<>(result.get(j));
+                list.add(nums[i]);
+                result.add(list);
+            }
+            prevSize = size;
+        }
         return result;
     }
 
-    // dfs method
-    // Time complexity: O(n*2^n-1) is worst (no duplicate), O(n^2) is best (all input numbers is same)
-    // Space: O(n) Stack is always O(n), no matter all is same or duplicate. List is same, too.
-    private void helper(int[] nums, List<Integer> list, List<List<Integer>> result, int index) {
+    /**
+     * Time:
+     *     Worst: no duplicate elements, O(n*2^n), n * 2^(n-1) times copy, 2^n list add, 2^n list remove.
+     *     Best:  all elements is duplicate, O(n^2), n list add, n list remove
+     * Space: O(2n), O(n) for implicit stack, O(n) for template list. No matter how many duplicates.
+     */
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        if (nums == null) {
+            return new ArrayList<>();
+        }
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList<>();
+        helper(result, new ArrayList<>(), nums, 0);
+        return result;
+    }
+    
+    private void helper(List<List<Integer>> result, List<Integer> list, int[] nums, int start) {
         result.add(new ArrayList<>(list));
-        for (int i = index; i < nums.length; i++) {
-            if (i > index && nums[i] == nums[i - 1]) {
+        for (int i = start; i < nums.length; i++) {
+            if (i > start && nums[i] == nums[i - 1]) {
                 continue;
             }
             list.add(nums[i]);
-            helper(nums, list, result, i + 1);
+            helper(result, list, nums, i + 1);
             list.remove(list.size() - 1);
         }
     }

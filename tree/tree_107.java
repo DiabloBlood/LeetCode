@@ -1,17 +1,17 @@
 
 
 
-class Solution102 {
+class Solution107 {
     /**
      * BFS method:
      * Time:  O(n)
      * Space: best O(1) of flat list tree, worst O(n/2) of complete binary tree
      */
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
         if (root == null) {
             return new ArrayList<>();
         }
-        List<List<Integer>> result = new ArrayList<>();
+        List<List<Integer>> result = new LinkedList<>();
         Queue<TreeNode> queue = new ArrayDeque<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
@@ -27,19 +27,19 @@ class Solution102 {
                     queue.offer(cur.right);
                 }
             }
-            result.add(list);
+            result.add(0, list);
         }
         return result;
     }
 
     /**
      * DFS method:
-     * Time:  O(n)
+     * Time:  best O(n + logn), worst O(2n)
      * Space: best O(logN) of complete binary tree, worst O(n) of flat list tree
      */
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
-        helper(result, root, 0);
+        Collections.reverse(result);
         return result;
     }
     

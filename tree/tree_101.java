@@ -1,7 +1,7 @@
 
 
 
-class Solution {
+class Solution101 {
     /**
      * Case Analysis:
      * 1. p == null && q == null; return true; (Bottom Condition)
@@ -12,7 +12,7 @@ class Solution {
      * 
      * Complexity: assume tree p has `m` nodes, tree q has `n` nodes.
      * Time: best O(1), worst O(n) (In worst case m == n)
-     * Space: O(logn), tree height
+     * Space: best O(1), avg O(logn) of complete binary tree, worst O(n) of flat list tree
      */
     public boolean isSymmetric(TreeNode root) {
         if (root == null) {

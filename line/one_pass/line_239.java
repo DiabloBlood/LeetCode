@@ -1,15 +1,14 @@
 
 
 
-class Solution {
+class Solution239 {
 
     /*
-     * O(n) solution, every element add to deque one time, remote from deque one time. Assight to result is O(n-k)
+     * O(n) solution, every element add to deque one time, remote from deque one time. Assigh to result is O(n-k)
      * Time:  2n + n - k, O(3n - k)
      * Space: O(k)
      *
      */
-
     public int[] maxSlidingWindow(int[] nums, int k) {
         if (nums == null || nums.length == 0 || k < 1 || k > nums.length) {
             //throw new IllegalArgumentException();
@@ -19,15 +18,15 @@ class Solution {
         int[] result = new int[len - k + 1];
         Deque<Integer> deque = new ArrayDeque<>();
         for (int i = 0; i < len; i++) {
-            if (i > 0 && deque.peekFirst() < i - k + 1) {
-                deque.removeFirst();
+            if (i >= k && deque.peek() < i - k + 1) {
+                deque.poll();
             }
             while(!deque.isEmpty() && nums[i] > nums[deque.peekLast()]) {
-                deque.removeLast();
+                deque.pollLast();
             }
-            deque.addLast(i);
+            deque.offer(i);
             if (i >= k - 1) {
-                result[i - k + 1] = nums[deque.peekFirst()];
+                result[i - k + 1] = nums[deque.peek()];
             }
         }
         return result;
@@ -39,7 +38,7 @@ class Solution {
      * Space: O(1)
      *
      */
-    public int[] maxSlidingWindow2(int[] nums, int k) {
+    public int[] maxSlidingWindow(int[] nums, int k) {
         if (nums == null || nums.length == 0 || k < 1 || k > nums.length) {
             //throw new IllegalArgumentException();
             return new int[0];

@@ -14,8 +14,9 @@ public class Solution147 {
     // any time there are two Lists
     public ListNode insertionSortList(ListNode head) {
         ListNode fakeHead = new ListNode(-1);
+        ListNode cur;
         while(head != null) {
-            ListNode cur = fakeHead;
+            cur = fakeHead;
             while(cur.next != null && cur.next.val < head.val) {
                 cur = cur.next;
             }
