@@ -56,8 +56,3 @@ public class Solution1 {
         return result;
     }
 }
-
-
-
-
-
