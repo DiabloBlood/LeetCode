@@ -11,7 +11,7 @@ class Solution106 {
      *      /  \
      *     15   7
      * Input: inorder [9,3,15,20,7]
-     *        preorder [9,15,7,20,3]
+     *        postorder [9,15,7,20,3]
      * 
      * Notes: Assume no duplicates is very important!!!
      * 1. Recursion buttom condition no need to check pre index out of bound.

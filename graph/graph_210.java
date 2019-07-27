@@ -1,7 +1,7 @@
 
 
 
-class Solution207 {
+class Solution210 {
     /**
      * V = numCourses
      * E = prerequisites.length
@@ -13,10 +13,11 @@ class Solution207 {
      * Space: O(2V + E) ~ O(3V + E)
      *     1. Graph need O(V + E), indegree array need O(V), queue best is O(1) worst is O(V) 
      */
-    public boolean canFinish(int numCourses, int[][] prerequisites) {
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
         if (numCourses < 1 || prerequisites == null) {
-            return false;
+            return new int[0];
         }
+        int[] result = new int[numCourses];
         //build graph
         List<List<Integer>> graph = new ArrayList<>();
         int[] indegree = new int[numCourses];
@@ -36,7 +37,7 @@ class Solution207 {
         for (int i = 0; i < numCourses; i++) {
             if (indegree[i] == 0) {
                 queue.offer(i);
-                count++;
+                result[count++] = i;
             }
         }
         //BFS
@@ -46,10 +47,10 @@ class Solution207 {
                 indegree[v]--;
                 if (indegree[v] == 0) {
                     queue.offer(v);
-                    count++;
+                    result[count++] = v;
                 }
             }
         }
-        return count == numCourses;
+        return count == numCourses ? result : new int[0];
     }
 }

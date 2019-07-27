@@ -1,7 +1,7 @@
 
 
 
-class Solution3 {
+class Solution156 {
     /**
      * Time: O(n), while loop operation times between `n/2` to `n`,
      *     `n/2` means right leaves is full, `n` means no right leaves.
