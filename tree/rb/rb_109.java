@@ -2,6 +2,29 @@
 
 
 class Solution109 {
+    public TreeNode sortedListToBST(ListNode head) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        int size = 0;
+        while (head != null) {
+            head = head.next;
+            size++;
+        }
+        return helper(dummy, 0, size - 1);
+    }
+    
+    private TreeNode helper(ListNode dummy, int start, int end) {
+        if (start > end) {
+            return null;
+        }
+        int mid = start + (end - start) / 2;
+        TreeNode left = helper(dummy, start, mid - 1);
+        TreeNode root = new TreeNode(dummy.next.val);
+        dummy.next = dummy.next.next;
+        root.left = left;
+        root.right = helper(dummy, mid + 1, end);
+        return root;
+    }
     /**
      * Notes: when head is just one list node. `root.left = sortedListToBST(head);` will lead to endless loop.
      *        That's why if `prev == null`, set `head = null`.

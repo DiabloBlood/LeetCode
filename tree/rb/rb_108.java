@@ -28,4 +28,30 @@ class Solution108 {
         root.right = helper(nums, mid + 1, end);
         return root;
     }
+
+    /**
+     * Build from inorder traversal.
+     *
+     * Time:  O(n), every recursive call will generate a node.
+     * Space: O(logn), since this BST is a hight-balanced BST.
+     */
+    public TreeNode sortedArrayToBST(int[] nums) {
+        if (nums == null) {
+            return null;
+        }
+        int[] index = new int[1];
+        return helper(nums, index, 0, nums.length - 1);
+    }
+    
+    private TreeNode helper(int[] nums, int[] index, int start, int end) {
+        if (start > end) {
+            return null;
+        }
+        int mid = start + (end - start) / 2;
+        TreeNode left = helper(nums, index, start, mid - 1);
+        TreeNode root = new TreeNode(nums[index[0]++]);
+        root.left = left;
+        root.right = helper(nums, index, mid + 1, end);
+        return root;
+    }
 }

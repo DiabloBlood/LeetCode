@@ -1,8 +1,8 @@
 
 
 
-class Solution269 {
-    
+class Solution {
+
     private class Node {
         final char label;
         int indegree;
@@ -11,15 +11,24 @@ class Solution269 {
             label = c;
             neighbors = new HashSet<>();
         }
+        
     }
     
+    /**
+     * Notes:
+     * 1. You may assume all letters are in lowercase.
+     * 2. You may assume that if a is a prefix of b, then a must appear before b in the given dictionary.
+     * 3. If the order is invalid, return an empty string.
+     * 4. There may be multiple valid order of letters, return any one of them is fine.
+     */
     public String alienOrder(String[] words) {
         if (words == null) {
             return "";
         }
+        StringBuilder sb = new StringBuilder();
         //build graph
-        int dictSize = 0;
         Node[] graph = new Node[26];
+        int dictSize = 0;
         for (String word: words) {
             for (int i = 0; i < word.length(); i++) {
                 char c = word.charAt(i);
@@ -29,6 +38,7 @@ class Solution269 {
                 }
             }
         }
+        
         for (int i = 0; i < words.length - 1; i++) {
             String word1 = words[i];
             String word2 = words[i + 1];
@@ -36,31 +46,32 @@ class Solution269 {
             for (int j = 0; j < len; j++) {
                 char c1 = word1.charAt(j);
                 char c2 = word2.charAt(j);
-                if (c1 != c2 && graph[c1 - 'a'].neighbors.add(graph[c2 - 'a'])) {
-                    graph[c2 - 'a'].indegree++;
+                if (c1 != c2) {
+                    if (graph[c1 - 'a'].neighbors.add(graph[c2 - 'a'])) {
+                        graph[c2 - 'a'].indegree++;
+                    }
                     break;
                 }
             }
         }
         
         // topological sort
-        Deque<Node> queue = new ArrayDeque<>();
-        StringBuilder sb = new StringBuilder();
         int count = 0;
-        for(Node node: graph) {
-            if(node != null && node.indegree == 0) {
-                queue.offer(node);
-                sb.append(node.label);
+        Deque<Node> queue = new ArrayDeque<>();
+        for (Node u: graph) {
+            if (u != null && u.indegree == 0) {
+                queue.offer(graph[u.label - 'a']);
+                sb.append(u.label);
                 count++;
             }
         }
-        while(!queue.isEmpty()) {
-            Node cur = queue.poll();
-            for(Node neighbor: cur.neighbors) {
-                neighbor.indegree--;
-                if(neighbor.indegree == 0) {
-                    queue.offer(graph[neighbor.label - 'a']);
-                    sb.append(neighbor.label);
+        while (!queue.isEmpty()) {
+            Node u = queue.poll();
+            for (Node v: graph[u.label - 'a'].neighbors) {
+                v.indegree--;
+                if (v.indegree == 0) {
+                    queue.offer(v);
+                    sb.append(v.label);
                     count++;
                 }
             }
@@ -68,5 +79,3 @@ class Solution269 {
         return count == dictSize ? sb.toString() : "";
     }
 }
-
-
