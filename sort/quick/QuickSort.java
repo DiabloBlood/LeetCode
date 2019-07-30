@@ -80,7 +80,6 @@ public class QuickSort {
         return new int[]{low, high};
     }
 
-
     private static void swap(int[] array, int p, int q) {
         int temp = array[p];
         array[p] = array[q];
