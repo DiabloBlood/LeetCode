@@ -7,9 +7,12 @@ class Solution373 {
      * 
      *  -------------------------->  
      * [a1b1, a1b2, a1b3, ..., a1bk] |
-     * [a1b1, a1b2, a1b3, ..., a1bk] |
-     * [a1b1, a1b2, a1b3, ..., a1bk] |
-     * 
+     * [a2b1, a2b2, a2b3, ..., a2bk] |
+     * [a3b1, a3b2, a3b3, ..., a3bk] |
+     *                           (down arrow)
+     * Analysis:
+     *     1. Do merge k sorted lists of the upper array.
+     *
      * Assume: `m` is length of nums1, `n` is length of nums2.
      * Time:  O(k*logk), fisrt for loop is `k*logk`, second for loop is `k*logk`.
      * Space: O(k)

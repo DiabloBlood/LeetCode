@@ -17,11 +17,10 @@ class Solution264 {
         int idx2 = 0, idx3 = 0, idx5 = 0;
         int num2 = 1, num3 = 1, num5 = 1;
         for (int i = 0; i < n; i++) {
-            int min = Math.min(Math.min(num2, num3), num5);
-            result[i] = min;
-            num2 = num2 == min ? 2 * result[idx2++] : num2;
-            num3 = num3 == min ? 3 * result[idx3++] : num3;
-            num5 = num5 == min ? 5 * result[idx5++] : num5;
+            result[i] = Math.min(Math.min(num2, num3), num5);
+            num2 = num2 == result[i] ? 2 * result[idx2++] : num2;
+            num3 = num3 == result[i] ? 3 * result[idx3++] : num3;
+            num5 = num5 == result[i] ? 5 * result[idx5++] : num5;
         }
         return result[n - 1];
     }
