@@ -1,7 +1,7 @@
 
 
 
-class Solution {
+class Solution269 {
 
     private class Node {
         final char label;
@@ -20,6 +20,16 @@ class Solution {
      * 2. You may assume that if a is a prefix of b, then a must appear before b in the given dictionary.
      * 3. If the order is invalid, return an empty string.
      * 4. There may be multiple valid order of letters, return any one of them is fine.
+     *
+     * Assume `n` is words.length, `m` is the avg length of each word.
+     * V: dictSize < 26 vertexes.
+     * E: `0` ~ `n-1` edges.
+     * 1. First loop is O(n*m). Consider case ["ett", "rftt"], if no first loop, the second loop cannot know char 't' and 'f'.
+     * 2. Second loop is find edge, O(n) ~ O(n*m) operations. At most `n-1` edges.
+     * 3. Topological sort operations is `26 + O(V+E)` = `O(n)`.
+     *
+     * Time: O(n*m), O(n*m) + O(n*m) + O(n)
+     * Space: O(n), O(V+E) = O(26 + n) = O(n)
      */
     public String alienOrder(String[] words) {
         if (words == null) {

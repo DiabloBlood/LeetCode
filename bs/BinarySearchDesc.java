@@ -4,7 +4,7 @@
 class BinarySearchDesc {
 
     /**
-     * Definition: given an descending array `nums`, an integer `target`,
+     * Definition: given a descending array `nums`, an integer `target`,
      *             find the position with largest value such that `f(x) < target`.
      * Input:  nums = [7, 6, 5, 4, 3, 2, 1]
      * Output: pos = 4, if target = 4
@@ -28,7 +28,7 @@ class BinarySearchDesc {
     }
 
     /**
-     * Definition: given an descending array `nums`, an integer `target`,
+     * Definition: given a descending array `nums`, an integer `target`,
      *             find the position with largest value such that `f(x) <= target`.
      * Input:  nums = [7, 6, 5, 4, 3, 2, 1]
      * Output: pos = 3, if target = 4
@@ -52,7 +52,7 @@ class BinarySearchDesc {
     }
 
     /**
-     * Definition: given an descending array `nums`, an integer `target`,
+     * Definition: given a descending array `nums`, an integer `target`,
      *             find the position with smallest value such that `f(x) > target`.
      * Input:  nums = [7, 6, 5, 4, 3, 2, 1]
      * Output: pos = 2, if target = 4
@@ -76,7 +76,7 @@ class BinarySearchDesc {
     }
 
     /**
-     * Definition: given an descending array `nums`, an integer `target`,
+     * Definition: given a descending array `nums`, an integer `target`,
      *             find the position with smallest value such that `f(x) >= target`.
      * Input:  nums = [7, 6, 5, 4, 3, 2, 1]
      * Output: pos = 3, if target = 4

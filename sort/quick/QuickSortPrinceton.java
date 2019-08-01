@@ -92,8 +92,8 @@ public class QuickSortPrinceton {
         //int[] array = new int[] {85, 6, 57, 60, 83, 73, 72};
         //QuickSortPrinceton.sort(array);
         //System.out.println(Arrays.toString(array));
-        int[] array2 = new int[] {7, 3, 1, 3, 6, 2, 3};
-        //int[] array2 = new int[] {2, 1, 0, 2, 1, 0, 1};
+        //int[] array2 = new int[] {7, 3, 1, 3, 6, 2, 3};
+        int[] array2 = new int[] {2, 1, 0, 2, 1, 0, 1};
         System.out.println(QuickSortPrinceton.partition(array2, 0, array2.length - 1));
         System.out.println(Arrays.toString(array2));
     }

@@ -2,6 +2,12 @@
 
 
 class Solution109 {
+    /**
+     * Notes: No need to handle `head == null` corner case.
+     *
+     * Time:  O(n), every recursive call will generate a node.
+     * Space: O(logn), implicit stack, this is a balanced tree.
+     */
     public TreeNode sortedListToBST(ListNode head) {
         ListNode dummy = new ListNode(-1);
         dummy.next = head;
@@ -30,7 +36,7 @@ class Solution109 {
      *        That's why if `prev == null`, set `head = null`.
      * 
      * Time:  O(n*logn), find middle has extra operation.
-     * Space: O(logn), implicit stack.
+     * Space: O(logn), implicit stack, this is a balanced tree.
      */
     public TreeNode sortedListToBST(ListNode head) {
         if (head == null) {
