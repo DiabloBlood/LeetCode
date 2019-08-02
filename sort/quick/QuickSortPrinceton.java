@@ -38,8 +38,9 @@ import java.util.Arrays;
 public class QuickSortPrinceton {
     /**
      * Case Analysis:
-     * 1. `0` ~ `i - 1` is the part which `<= pivot`.
-     * 2. `i + 1` ~ `high` is the part which `> pivot`.
+     * 1. Any teim `0` ~ `i - 1` is the part which `<= pivot`.
+     * 2. Finally `i + 1` ~ `high` is the part which `> pivot`.
+     * 3. Finally `i` position is pivot.
      * 
      * Time:  Best  O(nlogn)
      *        Worst O(n^2 / 2) if the array is already sorted. The recursive tree is a flat list tree.
@@ -89,9 +90,9 @@ public class QuickSortPrinceton {
     }
 
     public static void main(String[] args) {
-        //int[] array = new int[] {85, 6, 57, 60, 83, 73, 72};
-        //QuickSortPrinceton.sort(array);
-        //System.out.println(Arrays.toString(array));
+        int[] array = new int[] {85, 6, 57, 60, 83, 73, 72};
+        QuickSortPrinceton.sort(array);
+        System.out.println(Arrays.toString(array));
         //int[] array2 = new int[] {7, 3, 1, 3, 6, 2, 3};
         int[] array2 = new int[] {2, 1, 0, 2, 1, 0, 1};
         System.out.println(QuickSortPrinceton.partition(array2, 0, array2.length - 1));

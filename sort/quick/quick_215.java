@@ -5,10 +5,10 @@ class Solution215 {
 
     /**
      * Quick Selection Algorithm.
-     * Time: Avg O(n), Totol operations = `n + n/2 + n/4 + n/8 + n/16 ...` = `2n`.
+     * Time: Avg O(2n), Totol operations = `n + n/2 + n/4 + n/8 + n/16 ...` = `2n`.
      *       Worst O(n^2), `n + n-1 + n-2 +...+1` = `n^2/2`, which array is already sorted.
      *       Worst case example, input [1, 2, 3, 4, 5, 6, 7], k = 7;
-     * Space: O(1), please notes than Quick Selection Algorithm don't use recursion.
+     * Space: O(1), please notes that Quick Selection Algorithm don't use recursion.
      */
     public int findKthLargest(int[] nums, int k) {
         if (nums == null || k < 1) {
@@ -49,7 +49,7 @@ class Solution215 {
     }
 
     /**
-     * Time:  O(n*logk), `k*logk + (n-k)*logk = n*logk`
+     * Time:  O((2n-k)*logk), build heap `k*logk`, offer `(n-k)*logk`, poll `(n-k)*logk`
      * Space: O(k)
      */
     public int findKthLargest(int[] nums, int k) {
