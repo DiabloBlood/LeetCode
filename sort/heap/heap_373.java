@@ -63,9 +63,7 @@ class Solution373 {
         });
         for (int i = 0; i < nums1.length; i++) {
             for (int j = 0; j < nums2.length; j++) {
-                List<Integer> pair = new ArrayList<>();
-                pair.add(nums1[i]);
-                pair.add(nums2[j]);
+                List<Integer> pair = Arrays.asList(nums1[i], nums2[j]);
                 pq.offer(pair);
                 if (pq.size() > k) {
                     pq.poll();

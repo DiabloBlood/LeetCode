@@ -8,7 +8,7 @@ class Solution313 {
      * Analysis:
      *    1. This is a merge k sorted lists problem.
      *
-     * Time:  O((n+k)*logk), first for loop `k*logk`, second for loop `n*logk`, total while loop operations stile at `n` level
+     * Time:  O((n+k)*logk), first for loop `k*logk`, second for loop `n*logk`, total while loop operations still at `n` level
      * Space: O(n + k), result array and heap size.
      */
     public int nthSuperUglyNumber(int n, int[] primes) {

@@ -75,7 +75,7 @@ public class QuickSortPrinceton {
         int pivot = array[high];
         int i = low;
         for (int j = low; j < high; j++) {
-            if (array[j] <= pivot) {
+            if (array[j] < pivot) {
                 swap(array, i++, j);
             }
         }

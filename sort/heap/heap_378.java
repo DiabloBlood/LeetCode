@@ -17,7 +17,7 @@ class Solution378 {
      * Time:  First for loop is `n*logn`, second for loop is `k*logn`.
      *        Best,  O(n*logn), `k` at O(n) level.
      *        Worst, O(n^2*logn), `k` at O(n^2) level.
-     * Space: O(n), heap size is `n`.
+     * Space: O(n), heap size at most is `n`.
      */
     public int kthSmallest(int[][] matrix, int k) {
         if (matrix == null) {
@@ -34,7 +34,7 @@ class Solution378 {
         for (int i = 0; i < n && i < k; i++) {
             pq.offer(new int[]{0, i});
         }
-        
+        // if k > n^2, pq.poll() may return `null`, then NullPointerException will throw.
         for (int i = 0; i < k - 1; i++) {
             int[] p = pq.poll();
             if (p[0] + 1 == n) {

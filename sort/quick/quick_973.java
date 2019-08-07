@@ -58,7 +58,7 @@ class Solution973 {
     /**
      * Heap method. Use a max heap, so the remain points should be the K cloest one.
      * 
-     * Time:  O((2n-k)*logk), build heap `k*logk`, offer `(n-k)*logk`, poll `(n-k)*logk`
+     * Time:  O((2n-k)*logk), build heap `k*logk`, offer `(n-k)*logk`, poll `(n-k)*logk`, build result `k`.
      * Space: O(k)
      */
     public int[][] kClosest(int[][] points, int K) {
