@@ -8,33 +8,31 @@ public class MergeSort {
         if (array == null) {
             throw new NullPointerException();
         }
-        mergeSort(array, 0, array.length - 1);
+        mergeSort(array, new int[array.length], 0, array.length - 1);
     }
     
-    private static void mergeSort(int[] array, int low, int high) {
-        if(low >= high) {
+    private static void mergeSort(int[] array, int[] temp, int low, int high) {
+        if(low == high) {
             return;
         }
         int mid = low + (high - low) / 2;
-        mergeSort(array, low, mid);
-        mergeSort(array, mid + 1, high);
-        merge(array, low, mid, high);
+        mergeSort(array, temp, low, mid);
+        mergeSort(array, temp, mid + 1, high);
+        merge(array, temp, low, mid, high);
     }
 
     /**
      * Case Analysis:
-     *     1. i <= mid && j <= end && a[i] < a[j];  --> temp[k] = a[i++];
-     *     2. i <= mid && j > end;                  --> temp[k] = a[i++];
-     *     3. i <= mid && j <= end && a[i] >= a[j]; --> temp[k] = a[j++];
-     *     4. i > mid && j <= end;                  --> temp[k] = a[j++];
+     *     1. i <= mid && j <= end && a[i] < a[j];  --> temp[k++] = a[i++];
+     *     2. i <= mid && j > end;                  --> temp[k++] = a[i++];
+     *     3. i <= mid && j <= end && a[i] >= a[j]; --> temp[k++] = a[j++];
+     *     4. i > mid && j <= end;                  --> temp[k++] = a[j++];
      *     5. i > mid && j > end; //do nothing, loop already finished.
      */  
-    private static void merge(int[] array, int low, int mid, int high) {
-        int n = high - low + 1;
-        int[] temp = new int[n];
+    private static void merge(int[] array, int[] temp, int low, int mid, int high) {
         int i = low;
         int j = mid + 1;
-        int k = 0;
+        int k = low;
         while (i <= mid && j <= high) {
             temp[k++] = array[i] < array[j] ? array[i++] : array[j++];
         }
@@ -44,8 +42,8 @@ public class MergeSort {
         while (j <= high) {
             temp[k++] = array[j++];
         }
-        for (k = 0 ; k < n ; k++) {
-            array[low + k] = temp[k];
+        for (k = low; k <= high ; k++) {
+            array[k] = temp[k];
         }
     }
 
