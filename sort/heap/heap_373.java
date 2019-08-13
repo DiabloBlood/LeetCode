@@ -15,7 +15,7 @@ class Solution373 {
      *
      * Assume: `m` is length of nums1, `n` is length of nums2.
      * Time:  O(k*logk), fisrt for loop is `k*logk`, second for loop is `k*logk`.
-     * Space: O(k)
+     * Space: O(k), heap size.
      */
     public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         if (nums1 == null || nums2 == null || nums1.length == 0) {
@@ -35,8 +35,7 @@ class Solution373 {
         int size = Math.min(nums1.length * nums2.length, k);
         for (int i = 0; i < size; i++) {
             int[] cur = pq.poll();
-            List<Integer> list = Arrays.asList(nums1[cur[0]], nums2[cur[1]]);
-            result.add(list);
+            result.add(Arrays.asList(nums1[cur[0]], nums2[cur[1]]));
             int nextIdx = cur[0] + 1;
             if (nextIdx == nums1.length) {
                 continue;
