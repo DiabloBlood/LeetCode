@@ -23,7 +23,7 @@ public class Heap {
     }
 
     private void heapify() {
-        for (int i = size - 1; i >= 0; i--) {
+        for (int i = (size / 2) - 1; i >= 0; i--) {
             siftDown(i);
         }
     }
