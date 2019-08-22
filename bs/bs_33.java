@@ -173,9 +173,9 @@ class Solution33 {
             int mid = left + (right - left) / 2;
             if (nums[mid] == target) {
                 return mid;
-            } else if ((target >  tail && nums[mid] >  tail && nums[mid] >  target)
-                       || (target >  tail && nums[mid] <= tail)
-                       || (target <= tail && nums[mid] <= tail && nums[mid] >  target)) {
+            } else if (target > tail && nums[mid] > tail && nums[mid] > target
+                       || target > tail && nums[mid] <= tail
+                       || target <= tail && nums[mid] <= tail && nums[mid] > target) {
                 right = mid - 1;     
             } else {
                 left = mid + 1;
