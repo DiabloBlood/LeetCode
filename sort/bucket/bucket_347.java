@@ -12,10 +12,10 @@ class Solution347 {
      * Problem Pitfalls:
      *     1. Case nums = [1, 1, 2, 2, 3, 3, 4, 4], k = 2; We just want out put 2 numbers. [1, 2], [2, 3]... all is right.
      *
-     * Time:  O(n), first for loop is `n`, second for loop is `n`, third for loop is between [k, n + k]
-     *              Total is between [2n + k, 3n + k]
-     *              Third loop please consider case [1, 2, 3, 4, 5, 6, 7] and [1, 1, 1, 1, 1, 1, 1], respectively.
-     * Space: O(3n), map is `n`, bucket list is `2n`, total is `3n` 
+     * Time:  O(n), first for loop is `n`, second for loop is `n`, third for loop is between [k, n]
+     *              Total is between [2n + k, 3n]
+     *              Third loop please consider case [1, 2, 3, 4, 5, 6, 7] (k) and [1, 1, 1, 1, 1, 1, 1] (k), respectively.
+     * Space: O(3n), map is `n`, bucket list is `2n`, total is `3n`
      */
     public List<Integer> topKFrequent(int[] nums, int k) {
         if (nums == null) {
@@ -67,7 +67,7 @@ class Solution347 {
      * Time:  O(n), first for loop is `n`, second for loop is `n`, third for loop is between [k, n + k]
      *              Total is between [2n + k, 3n + k]
      *              Third loop please consider case [1, 2, 3, 4, 5, 6, 7] (n + k) and [1, 1, 1, 1, 1, 1, 1] (k), respectively.
-     * Space: O(3n), map is `n`, bucket list is `2n`, total is `3n` 
+     * Space: O(3n), map is `n`, bucket list is `2n`, total is `3n`
      */
     public List<Integer> topKFrequent(int[] nums, int k) {
         if (nums == null) {
