@@ -7,7 +7,7 @@ public class Solution141 {
      * Assume: index of circle, 1 <= i <= X, `X` is the circle size.
      *         when slow enter the circle, slow index is `s`, fast index is `f`,
      *         after `k` steps, s == f,
-     *         we need to prove that there has the solution of integer k to make (s + k) % X == (s + 2k) % X valid.
+     *         we need to prove that there has the solution of integer k to make (s + k) % X == (f + 2k) % X valid.
      *         => s +  k == a * X + c
      *            f + 2k == b * X + c
      *         => k = (b - a) * X - f + s
@@ -16,7 +16,7 @@ public class Solution141 {
      * Complexity: 
      *      list size = H + X, `H` is the part not in the circle.
             when t >= 1, `k` has non-negtive integer solution. Then 1 <= k <= 2*X - 1
-     * Time:  O(H + X) = O(n)
+     * Time:  O(n), total = `H + k` which between [H, H + 2X] ~ [H, 2n]
      * Space: O(1)
      */
     public boolean hasCycle(ListNode head) {
@@ -35,12 +35,3 @@ public class Solution141 {
         return false;
     }
 }
-
-
-
-
-
-
-
-
-
