@@ -23,7 +23,6 @@ class Solution74 {
         
         while (left <= right) {
             int mid = left + (right - left) / 2;
-            System.out.println(mid);
             int row = mid / n;
             int col = mid % n;
             if (matrix[row][col] == target) {

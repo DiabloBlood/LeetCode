@@ -8,16 +8,17 @@ class Solution70 {
      * Problem Pitfalls:
      *     1. This method solution space is a graph. Which could be topological sorted.
      *     2. State transition equation: f[i] = f[i - 1] + f[i - 2]
+     *     3. How to handle input `n == 0` or `n == 1`?
      *
-     * Time:  O(n), the graph only has `n` nodes, for loop takes `n`
+     * Time:  O(n), the graph only has `n` nodes, `2n` edges, for loop takes `n`
      * Space: O(1)
      */
     public int climbStairs(int n) {
         if (n < 1) {
             return 0;
         }
-        int prev = 1;   // which is i = 0;
-        int next = 1;   // which is i = 1;
+        int prev = 1;   // case i == 0;
+        int next = 1;   // case i == 1;
         for (int i = 2; i <= n; i++) {
             int cur = prev + next;  // which means f[i] = f[i - 1] + f[i - 2] 
             prev = next;
@@ -33,7 +34,7 @@ class Solution70 {
      *     1. This method solution space is a graph. Which could be topological sorted.
      *     2. State transition equation: f[i] = f[i - 1] + f[i - 2]
      *
-     * Time:  O(n), the graph only has `n` nodes, for loop takes `n`
+     * Time:  O(n), the graph only has `n` nodes, `2n` edges, for loop takes `n`
      * Space: O(n), visited map size is `n`
      */
     public int climbStairs(int n) {
@@ -56,7 +57,7 @@ class Solution70 {
      *     1. This method solution space is a graph. Which could be topological sorted.
      *     2. State transition equation: f[i] = f[i - 1] + f[i - 2]
      *
-     * Time:  O(n), the graph only has `n` nodes.
+     * Time:  O(n), the graph only has `n` nodes， `2n` edges.
      * Space: O(2n), stack size at most is `n`, visited map size is `n`
      */
     public int climbStairs(int n) {

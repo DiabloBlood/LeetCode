@@ -45,7 +45,7 @@ class Solution218 {
                     map.put(h[1], temp - 1);
                 }
             }
-            int cur = map.lastKey();
+            int cur = map.lastKey();    // cur is the heighest ceiling
             if (cur != prev) {
                 result.add(Arrays.asList(h[0], cur));
                 prev = cur;
@@ -92,7 +92,7 @@ class Solution218 {
             } else {
                 pq.remove(h[1]);
             }
-            int cur = pq.peek();
+            int cur = pq.peek();    // cur is the heighest ceiling
             if (cur != prev) {
                 result.add(Arrays.asList(h[0], cur));
                 prev = cur;
