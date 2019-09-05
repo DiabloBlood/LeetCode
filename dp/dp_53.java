@@ -3,7 +3,7 @@
 
 class Solution53 {
     /**
-     * DP method without visited map.
+     * Optimized DP method, without visited map.
      *
      * Problem Analysis:
      *     1. Assume max sub array start index is `i`, end index is `j`,
@@ -29,8 +29,8 @@ class Solution53 {
         int max = Integer.MIN_VALUE;
         int sum = 0;    // node i == -1, the max sub array of nums[0:-1];
         
-        for (int i = 0; i < nums.length; i++) {
-            sum = nums[i] + (sum > 0 ? sum : 0);
+        for (int num: nums) {
+            sum = num + (sum > 0 ? sum : 0);
             max = Math.max(max, sum);
         }
         return max;

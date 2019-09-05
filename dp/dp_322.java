@@ -11,8 +11,8 @@ class Solution322 {
      *     3. Corner case `coins.length == 0`, should return `-1`;
      *     4. Corner case `amount == 0`, should return `0`, which mean 0 coins.
      *
-     * Time:  O(m * n), the graph only has `n` nodes, `m` edges.
-     * Space: O(1)
+     * Time:  O(m * n), the graph only has `n` nodes, `m * n` edges.
+     * Space: O(n)
      */
     public int coinChange(int[] coins, int amount) {
         if (coins == null) {
@@ -42,7 +42,7 @@ class Solution322 {
      *     4. Corner case `amount == 0`, should return `0`, which mean 0 coins.
      *
      * Assume coins.length == `m`, amount is `n`
-     * Time:  O(m * n), the graph only has `n` nodes, `m` edges.
+     * Time:  O(m * n), the graph only has `n` nodes, `m * n` edges.
      * Space: O(2n), stack size at most is `n`, visited map size is `n`.
      */
     public int coinChange(int[] coins, int amount) {

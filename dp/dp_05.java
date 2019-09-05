@@ -56,11 +56,9 @@ class Solution05 {
         for (int i = n - 1; i >= 0; i--) {
             for (int j = i; j < n; j++) {
                 dp[i][j] = s.charAt(i) == s.charAt(j) && (i + 1 > j - 1 || dp[i + 1][j - 1]);
-                if (dp[i][j]) {
-                    if (j - i > end - start) {
-                        start = i;
-                        end = j;
-                    }
+                if (dp[i][j] && j - i > end - start) {
+                    start = i;
+                    end = j;
                 }
             }
         }
@@ -85,10 +83,7 @@ class Solution05 {
         boolean dp[][] = new boolean[n][n];
         for (int i = n - 1; i >= 0; i--) {
             for (int j = i; j < n; j++) {
-                if (!helper(s, dp, i, j)) {
-                    continue;
-                }
-                if (j - i > end - start) {
+                if (helper(s, dp, i, j) && j - i > end - start) {
                     start = i;
                     end = j;
                 }
