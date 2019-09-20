@@ -3,7 +3,41 @@
 
 class Solution222 {
     /**
-     * Traveral method. An O(n) time trivial method.
+     * Binary search method. An O((logn)^2) method.
+     *
+     * Problem Analysis:
+     *     1. Every recursion only calculate one subtree.
+     *
+     * Time: O((logn)^2), assume tree height is `h`, 1st layer need `2h` opertions, 2nd layer need `4 * (h - 1)` opertions,
+     *                    3rd layer need `4 * (h - 2)` opertions, kth layer need `4 * (h - k + 1)` opertions,
+     *                    total = 2h + 4(h - 1) + 4(h - 2) + 4(h - 3) +...+ 4
+     *                          = 2h + 2h^2
+     *                          = O(h^2)
+     * Space O(logn), tree height
+     */
+    public int countNodes(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int lh = getHeight(root.left, true);
+        int rh = getHeight(root.right, false);
+        // which means this tree is full binary tree
+        if (lh == rh) {
+            return (1 << lh + 1) - 1;
+        }
+        return countNodes(root.left) + countNodes(root.right) + 1;
+    }
+
+    private int getHeight(TreeNode node, boolean isLeft) {
+        int h = 0;
+        while (node != null) {
+            h++;
+            node = isLeft? node.left : node.right;
+        }
+        return h;
+    }
+    /**
+     * Traversal method. An O(n) time trivial method.
      * 
      * Problem Analysis:
      *     1. Please thinking what is complete binary tree.
@@ -17,32 +51,27 @@ class Solution222 {
         if (root == null) {
             return 0;
         }
-        int height = getHeight(root);
-        int[] leafCount = new int[1];
-        helper(root, height, leafCount, 1);
-        return (1 << (height - 1)) - 1 + leafCount[0];
+        int h = getHeight(root);
+        int leavesCount = helper(root, h, 0);
+        return  (1 << h - 1) - 1 + leavesCount;
     }
-    
+
     private int getHeight(TreeNode node) {
         int h = 0;
         while (node != null) {
-            node = node.left;
             h++;
+            node = node.left;
         }
         return h;
     }
-    
-    private void helper(TreeNode node, int height, int[] leafCount, int depth) {
+
+    private int helper(TreeNode node, int height, int depth) {
         if (node == null) {
-            return;
+            return 0;
         }
-        if (node.left == null && node.right == null) {
-            if (depth == height) {
-                leafCount[0]++;
-            }
-            return;
+        if (node.left == null && node.right == null && depth == height - 1) {
+            return 1;
         }
-        helper(node.left, height, leafCount, depth + 1);
-        helper(node.right, height, leafCount, depth + 1);
+        return helper(node.left, height, depth + 1) + helper(node.right, height, depth + 1);
     }
 }
