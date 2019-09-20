@@ -6,9 +6,10 @@ class Solution1091 {
      * Problem Analysis.
      *     1. This is BFS shortest path problem.
      *
-     * Time:  O(m * n), for every node, only enqueue on time.
-     * Space: O(m + n), please draw contour line of this graph, assume input is grid[m][n], all cells value is 0,
-     *                  the deepest level has `m + n` nodes, so at most `(m + n)` will been added to queue. 
+     * Time:  O(8m * n), for every node, only enqueue one time, enqueue is O(m * n), however per node has a 8 round for loop.
+     * Space: O(m * n), please draw contour line of this graph, assume input is grid[m][n], all cells value is 0,
+     *                  the deepest level has `m + n` nodes, so at most `(m + n)` will been added to queue.
+     *                  queue size at most is `m + n`, visited map is `m * n`.
      */
     public int shortestPathBinaryMatrix(int[][] grid) {
         if (grid == null || grid.length == 0 || grid[0].length == 0 || grid[0][0] == 1) {
@@ -49,9 +50,10 @@ class Solution1091 {
      * Problem Analysis.
      *     1. This is BFS shortest path problem.
      *
-     * Time:  O(8m*n), for every node, 8 nodes around this node will been added to queue.
-     * Space: O(8(m + n)), please draw contour line of this graph, assume input is grid[m][n], all cells value is 0,
-     *                     the deepest level has `m + n` nodes, so at most `8(m + n)` will been added to queue. 
+     * Time:  O(8m * n), for every node, 8 nodes around this node will been added to queue, enqueue is O(8m * n)
+     * Space: O(m * n), please draw contour line of this graph, assume input is grid[m][n], all cells value is 0,
+     *                     the deepest level has `m + n` nodes, so at most `8(m + n)` will been added to queue.
+     *                     queue size at most is `8(m + n)`, visited map is `m * n`.
      */
     public int shortestPathBinaryMatrix(int[][] grid) {
         if (grid == null || grid.length == 0) {
