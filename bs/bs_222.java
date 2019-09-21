@@ -13,7 +13,7 @@ class Solution222 {
      *                    total = 2h + 4(h - 1) + 4(h - 2) + 4(h - 3) +...+ 4
      *                          = 2h + 2h^2
      *                          = O(h^2)
-     * Space O(logn), tree height
+     * Space O(logn), stack space is tree height.
      */
     public int countNodes(TreeNode root) {
         if (root == null) {
@@ -44,7 +44,7 @@ class Solution222 {
      *     2. Get tree height first, then count leaf nodes of the last level.
      *     3. Total nodes of complete binary tree is `2^(h - 1) - 1 + last level leaf nodes`.
      *
-     * Time:  O(n), get height is `logn`, traverse is `n`.
+     * Time:  O(n), get height is `logn`, traverse less than `n`.
      * Space: O(logn), traverse recursion stack space is `logn`.
      */
     public int countNodes(TreeNode root) {
@@ -52,8 +52,9 @@ class Solution222 {
             return 0;
         }
         int h = getHeight(root);
-        int leavesCount = helper(root, h, 0);
-        return  (1 << h - 1) - 1 + leavesCount;
+        int[] count = new int[1];
+        helper(root, count, h, 0);
+        return  (1 << h - 1) - 1 + count[0];
     }
 
     private int getHeight(TreeNode node) {
@@ -65,13 +66,38 @@ class Solution222 {
         return h;
     }
 
-    private int helper(TreeNode node, int height, int depth) {
-        if (node == null) {
+    private boolean helper(TreeNode node, int[] count, int height, int depth) {
+        if (node == null && depth == height - 1) {
+            return true;
+        }
+
+        if (node.left == null && node.right == null) {
+            if (depth == height - 1) {
+                count[0]++;
+                return false;
+            }
+            return true;
+        }
+        boolean isStop = helper(node.left, count, height, depth + 1);
+        if (isStop) {
+            return true;
+        }
+        return helper(node.right, count, height, depth + 1);
+    }
+
+    /**
+     * Traversal method. An O(n) time trivial method.
+     *
+     * Problem Analysis:
+     *     1. Counting nodes when traversal, bottom up method.
+     *
+     * Time:  O(n)
+     * Space: O(logn), stack space is tree height.
+     */
+    public int countNodes(TreeNode root) {
+        if (root == null) {
             return 0;
         }
-        if (node.left == null && node.right == null && depth == height - 1) {
-            return 1;
-        }
-        return helper(node.left, height, depth + 1) + helper(node.right, height, depth + 1);
+        return countNodes(root.left) + countNodes(root.right) + 1;
     }
 }
