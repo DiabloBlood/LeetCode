@@ -1,39 +1,20 @@
-/*
-Given an array nums and a value val, remove all instances of that value in-place and return the new length.
 
-Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
-
-The order of elements can be changed. It doesn't matter what you leave beyond the new length.
-
-Example 1:
-
-Given nums = [3,2,2,3], val = 3,
-
-Your function should return length = 2, with the first two elements of nums being 2.
-
-It doesn't matter what you leave beyond the returned length.
-Example 2:
-
-Given nums = [0,1,2,2,3,0,4,2], val = 2,
-
-Your function should return length = 5, with the first five elements of nums containing 0, 1, 3, 0, and 4.
-
-Note that the order of those five elements can be arbitrary.
-
-It doesn't matter what values are set beyond the returned length.
-*/
-
-
-/*
-* 1. 0 -> end - 1 is valid, which means array[0] - array[end - 1] is not val
-* 2. if nums[i] != val, which means found next valid number
-* 3. end should be return length
-*/
 
 
 public class Solution27 {
-
-    // O(n)
+    /**
+     * Problem Analysis:
+     *     1. Interval [0, end) is valid, which means `a[0] --> a[end - 1]` not equal to val.
+     *     2. if a[i] != val, which means next valid number found.
+     *     3. `end` should be the return length.
+     *
+     * Case Analysis:
+     *     1. a[i] != val; ---> a[end++] = a[i];
+     *     2. a[i] == val; ---> // do nothing
+     *
+     * Time:  O(n)
+     * Space: O(1)
+     */
     public int removeElement(int[] nums, int val) {
         if (nums == null) {
             return -1;
@@ -47,12 +28,3 @@ public class Solution27 {
         return end;
     }
 }
-
-
-
-
-
-
-
-
-
