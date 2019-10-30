@@ -16,22 +16,21 @@ class Solution80 {
      *     2. nums[end - 2] == nums[end - 1] && nums[end - 1] <  nums[i]; ---> // nums[end++] = nums[i];
      *     3. nums[end - 2] <  nums[end - 1] && nums[end - 1] == nums[i]; ---> // nums[end++] = nums[i];
      *     4. nums[end - 2] <  nums[end - 1] && nums[end - 1] <  nums[i]; ---> // nums[end++] = nums[i];
-     *
      *     =>
-     *
      *     1. nums[end - 2] == nums[i]; ---> // do nothing;
      *     2. nums[end - 2] <  nums[i]; ---> // nums[end++] = nums[i];
      *     3. nums[end - 2] <  nums[i]; ---> // nums[end++] = nums[i];
      *     4. nums[end - 2] <  nums[i]; ---> // nums[end++] = nums[i];
-     *
      *     =>
-     *
      *     1. nums[end - 2] == nums[i]; ---> // do nothing;
      *     2. nums[end - 2] <  nums[i]; ---> // nums[end++] = nums[i];
+     *
+     * Time:  O(n)
+     * Space: O(1)
      */
     public int removeDuplicates(int[] nums) {
         if (nums == null) {
-            return 0;
+            return -1;
         }
         int len = nums.length;
         if (len < 3) {
