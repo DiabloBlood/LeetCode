@@ -7,7 +7,7 @@ public class Solution26 {
      *     1. This a sorted array, if this array is not sorted, either use hashmap or sort this array first.
      *
      * Problem Analysis:
-     *     1. [0, end) is valid
+     *     1. Interval [0, end) is valid
      *     2. if `a[i] > a[end - 1]`, which means next larger number found.
      *     3. `end` should be return length.
      *     4. Result at least is `1` when array contains more than 1 elements.
