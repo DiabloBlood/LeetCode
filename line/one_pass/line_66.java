@@ -1,11 +1,15 @@
 
 
-/*
- * Time:  O(n)
- * Space: O(n)
- */
 
 public class Solution66 {
+    /**
+     * Case Analysis:
+     *     1. An array with all elements is `9`.
+     *     2. A trivial array.
+     *
+     * Time:  O(n), best is O(1), worst is O(n),  when all elements of this array is `9`.
+     * Space: O(1), worst case is O(n), when all elements of this array is `9`.
+     */
 	public int[] plusOne(int[] digits) {
         if(digits == null || digits.length == 0) {
             throw new IllegalArgumentException();
@@ -17,8 +21,8 @@ public class Solution66 {
             }
             digits[i] = 0;
         }
-        int[] newDigits = new int[digits.length + 1];
-        newDigits[0] = 1;
-        return newDigits;
+        int[] result = new int[digits.length + 1];
+        result[0] = 1;
+        return result;
     }
 }
