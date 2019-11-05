@@ -48,9 +48,12 @@ class Solution80 {
      * A more concise method.
      *
      * Case Analysis:
-     *     1. end < 2;                  ---> nums[end++] = nums[i]; 
+     *     1. end < 2;                  ---> nums[end++] = nums[i];
      *     2. nums[end - 2] == nums[i]; ---> // do nothing;
-     *     3. nums[end - 2] <  nums[i]; ---> nums[end++] = nums[i]; 
+     *     3. nums[end - 2] <  nums[i]; ---> nums[end++] = nums[i];
+     *
+     * Time:  O(n)
+     * Space: O(1)
      */
     public int removeDuplicates(int[] nums) {
         if (nums == null) {
