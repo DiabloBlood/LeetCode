@@ -21,7 +21,7 @@ class Solution328 {
      *     1. even == null || even.next == null; ---> while loop break.
      *     2. even != null && even.next != null; ---> while loop continue. (Use demorgan's law)
      *
-     * Corner cases:
+     * Corner Cases:
      *     1. head == null;      ---> should be handled, otherwise `ListNode even = head.next` will throw `NullPointerException`.
      *     2. head.next == null; ---> doesn't need to handle.
      *
