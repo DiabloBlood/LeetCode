@@ -11,10 +11,15 @@ class Solution92 {
      *     Asssume input is `1->2->3->4->5->6->7->null`, `m == 3`, `n == 5`.
      *         1. ptr `cur` move to `m - 1 == 2`. `cur.next` is the tail of reversed list, don't lost this node's reference.
      *         2. reverse `3->4->5`, after reverse, ptr `prev` at `5`, which is the new head, ptr `head` at `6`.
-     *         3. `2` (`cur`) should point to `5`, `3` (`tail`) should point to `6` (`head`).
+     *         3. `2` (`cur`, index `m - 1`) should point to `5`, `3` (`tail`) should point to `6` (`head`, index `n + 1`).
      *
      * Corner Cases:
-     *     `1 ≤ m ≤ n ≤ length` already guaranteed, otherwise `cur.next` will throw `NullPointerException`.
+     *     1. `1 ≤ m ≤ n ≤ length` already guaranteed, otherwise `cur.next` will throw `NullPointerException`.
+     *     2. m == 1; ---> if doesn't use dummy node, this case cannot be handled.
+     *     3. n == length; ---> finally head is `null`, this case doesn't has any side effect.
+     *     4. Only one node case, like `1->null`;
+     *        ---> there must be have `m == n == 1`, ptr `cur` and `tail` will at `1`, finally `prev` at `1` and `head` at `null`.
+     *             this case doesn't has any side effect.
      *
      * Time:  O(n), less than one pass, please note `n <= length`.
      * Space: O(1)
@@ -23,14 +28,13 @@ class Solution92 {
         ListNode dummy = new ListNode(-1);
         ListNode cur = dummy;
         dummy.next = head;
-        
         for (int i = 0; i < m - 1; i++) {
             cur = cur.next;
         }
         ListNode tail = cur.next; // tail of reversed list.
         ListNode prev = null;
         head = cur.next;
-        for (int i = m; i < n; i++) {
+        for (int i = m; i < n + 1; i++) {
             ListNode next = head.next;
             head.next = prev;
             prev = head;
