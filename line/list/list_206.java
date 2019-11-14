@@ -6,9 +6,20 @@
  *     1. Reverse
  */
 class Solution206 {
-    /*
+    /**
      * Iterative method.
-     * Time:  O(n)
+     *
+     * Problem Analysis:
+     *     1. Finally, ptr `prev` is the new head, ptr `head` at `null`.
+     *
+     * Case Analysis:
+     *     1. head == null; ---> while loop break.
+     *     2. head != null; ---> while loop continue.
+     *
+     * Corner Cases:
+     *     1. head == null; ---> doesn't need to handle, while loop will be skipped and return value `prev` is `null`.
+     *
+     * Time:  O(n), exactly one pass
      * Space: O(1)
      */
     public ListNode reverseList(ListNode head) {
