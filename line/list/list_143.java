@@ -51,7 +51,7 @@ public void reorderList(ListNode head) {
      * Key Points of findMid method:
      *     1. `head` must not be `null`, otherwise, `fast.next` will throw `NullPointerException`.
      *     2. For 1->2->3->4->null, finally `slow` at `2`.
-     *     3/ For 1->2->3->4->5->null, finally `slow` at `3`.
+     *     3. For 1->2->3->4->5->null, finally `slow` at `3`.
      */
     private ListNode findMid(ListNode head) {
         ListNode slow = head;

@@ -6,7 +6,7 @@
  *     1. Reverse
  */
 class Solution206 {
-    /**
+    /*
      * Iterative method.
      *
      * Problem Analysis:
@@ -58,12 +58,12 @@ class Solution206 {
         return helper(head, null);
     }
 
-    private ListNode helper(ListNode head, ListNode prev) {
+    private ListNode helper(ListNode prev, ListNode head) {
         if (head == null) {
             return prev;
         }
         ListNode next = head.next;
         head.next = prev;
-        return helper(next, head);
+        return helper(head, next);
     }
 }
