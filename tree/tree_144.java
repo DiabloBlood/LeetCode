@@ -3,38 +3,60 @@
 
 class Solution144 {
     /**
-     * Time:  O(n)
-     * Space: best O(logn) of complete binary tree, worst O(n) of flat list tree.
+     * Recursion Method
+     *
+     * Base Cases:
+     *     1. node == null; ---> return; // just return
+     *
+     * Corner Cases:
+     *     1. root == null; ---> doesn't need to handle, return value `result` is a empty array list.
+     *
+     * Time:  O(n), binary tree contains `n` nodes.
+     * Space: best  O(logn), for height-balanced binary tree, complete binary tree, full binary tree.
+     *        worst O(n), for skewed binary tree.
      */
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
-        helper(root, result);
+        helper(result, root);
         return result;
     }
-    
-    private void helper(TreeNode node, List<Integer> result) {
+
+    private void helper(List<Integer> result, TreeNode node) {
         if (node == null) {
             return;
         }
         result.add(node.val);
-        helper(node.left, result);
-        helper(node.right, result);
+        helper(result, node.left);
+        helper(result, node.right);
     }
 
 
     /**
-     * Time:  O(n)
-     * Space: best O(1) of flat list tree, worst O(logn) of complete binary tree.
+     * Iteration Method
+     *
+     * Key Points:
+     *     1. Push `cur.right` to stack first, since pre order is `root->left->right`,
+     *        push `right` child first will guarantee `left` child pop first. (Ref stack LIFO order)
+     *     2. `Deque` interface not allow `null` element.
+     *     3. Why space for height-balanced binary tree, complete binary tree, full binary tree is O(logn)?
+     *        Recursion method is hold every `root` nodes in implicit stack,
+     *        iteration method is hold every `right` child of `root` nodes in explicit stack, total hold nodes count is same.
+     *
+     * Corner Cases:
+     *     1. root == null; ---> return new ArrayList<>();
+     *        // `Deque` interface not allow `null` element, otherwise will throw `NullPointerException` when call `stack.push` method.
+     *
+     * Time:  O(n), binary tree contains `n` nodes.
+     * Space: best O(1), for skewed binary tree. (Any kind of skewed binary tree, left skewed, right skewed, or zigzag shape)
+     *        worst O(logn), for height-balanced binary tree, complete binary tree, full binary tree.
      */
     public List<Integer> preorderTraversal(TreeNode root) {
         if (root == null) {
             return new ArrayList<>();
-        } 
-
+        }
         List<Integer> result = new ArrayList<>();
         Deque<TreeNode> stack = new ArrayDeque<>();
         stack.push(root);
-        
         while (!stack.isEmpty()) {
             TreeNode cur = stack.pop();
             result.add(cur.val);
