@@ -19,12 +19,11 @@ class Solution445 {
      *     1. l1 == null && l2 == null;   ---> doesn't need to handle, return value `reverse(dummy.next)` is `null`
      *     2. l1 and l2 only one is null; ---> doesn't need to handle.
      *
-     * Time:  O(max(m, n)), two passes for l1 and l2 revese, `m` and `n` is the length of l1 and l2, respectively.
+     * Time:  O(3n), two passes for l1 and l2 revese, one pass while loop, `m` and `n` is the length of l1 and l2, respectively.
      * Space: O(1)
      */
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode dummy = new ListNode(-1);
-        ListNode cur = dummy;
         l1 = reverse(l1);
         l2 = reverse(l2);
         int carry = 0;
@@ -33,9 +32,9 @@ class Solution445 {
             int val2 = l2 == null ? 0 : l2.val;
             int sum = val1 + val2 + carry;
             carry = sum / 10;
-            ListNode temp = new ListNode(sum % 10);
-            temp.next = cur.next;
-            cur.next = temp;
+            ListNode head = new ListNode(sum % 10);
+            head.next = dummy.next;
+            dummy.next = head;
             l1 = l1 == null ? null : l1.next;
             l2 = l2 == null ? null : l2.next;
         }
