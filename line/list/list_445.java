@@ -78,16 +78,15 @@ class Solution445 {
         load(s1, l1);
         load(s2, l2);
         ListNode dummy = new ListNode(-1);
-        ListNode cur = dummy;
         int carry = 0;
         while (!s1.isEmpty() || !s2.isEmpty() || carry > 0) {
             int val1 = s1.isEmpty() ? 0 : s1.pop();
             int val2 = s2.isEmpty() ? 0 : s2.pop();
             int sum = val1 + val2 + carry;
             carry = sum / 10;
-            ListNode temp = new ListNode(sum % 10);
-            temp.next = cur.next;
-            cur.next = temp;
+            ListNode head = new ListNode(sum % 10);
+            head.next = dummy.next;
+            dummy.next = head;
         }
         return dummy.next;
     }
