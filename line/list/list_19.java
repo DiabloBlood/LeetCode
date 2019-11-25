@@ -16,7 +16,7 @@ class Solution19 {
      *        fast arrive `null`:    len         len - n - 1
      *
      * Corner Cases:
-     *     1. `n <= len` is guaranteed, which means `n` is always valid.
+     *     1. `1 <= n <= len` is guaranteed, which means `n` is always valid.
      *     2. head == null; ---> this input is impossible, `slow.next.next` will throw `NullPointerException`.
      *     3. head.next == null && n == 1; ---> finally `fast` at `null`, `slow` at index `0`, return value is `null`.
      *
@@ -37,6 +37,29 @@ class Solution19 {
             index++;
         }
         slow.next = slow.next.next;
+        return dummy.next;
+    }
+
+    /**
+     * Two pass method
+     *
+     * Time:  O(n), exactly one pass, ptr `fast` go through this list exactly 1 time.
+     * Space: O(1)
+     */
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(-1);
+        ListNode cur = dummy;
+        dummy.next = head;
+        int size = 0;
+        while (cur != null) {
+            cur = cur.next;
+            size++;
+        }
+        cur = dummy;
+        for (int i = 0; i < size - n - 1; i++) {
+            cur = cur.next;
+        }
+        cur.next = cur.next.next;
         return dummy.next;
     }
 }
