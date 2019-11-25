@@ -18,10 +18,10 @@ class Solution92 {
      *     2. m == 1; ---> if doesn't use dummy node, this case cannot be handled.
      *     3. n == length; ---> finally head is `null`, this case doesn't has any side effect.
      *     4. Only one node case, like `1->null`;
-     *        ---> there must be have `m == n == 1`, ptr `cur` and `tail` will at `1`, finally `prev` at `1` and `head` at `null`.
+     *        ---> there must have `m == n == 1`, ptr `cur` at `0` and `tail` at `1`, finally `prev` at `1` and `head` at `null`.
      *             this case doesn't has any side effect.
      *
-     * Time:  O(n), less than one pass, please note `n <= length`.
+     * Time:  O(n), equal or less than one pass, please note `n <= length`.
      * Space: O(1)
      */
     public ListNode reverseBetween(ListNode head, int m, int n) {

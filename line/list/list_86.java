@@ -6,7 +6,7 @@ class Solution86 {
      * Partition function is a subrotine of quicksort.
      *
      * Problem Pitfalls:
-     *     1. After loop end, one of l1.next and l2.next is not null. It depends on if tail.val < x or >= x.
+     *     1. After loop end, one of `l1.next` and `l2.next` is not null.
      *        Finally assign `l2.next = null`, please refer to Problem Analysis step (3).
      *
      * Problem Analysis:
