@@ -14,7 +14,7 @@ class Solution86 {
      *     2. Use 2 dummy nodes, left dummy node hold list with nodes less than `x`,
      *        right dummy node hold list with nodes greater or equal than `x`.
      *     3. After partition, list dummy1 is `dummy1->1->2->2->null`, list dummy2 is `dummy2->4->3->5->2->null`,
-     *        ptr l1 at `2`, ptr l2 at `5`, we should assign `l2.next = null`.
+     *        ptr `l1` at `2`, ptr `l2` at `5`, we should assign `l2.next = null`.
      *     4. Finally connect two lists, assign `l1.next = dummy2.next`, then return `dummy1.next`.
      *
      * Corner Cases:

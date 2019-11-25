@@ -50,28 +50,63 @@ class Solution148 {
         cur.next = l1 == null ? l2 : l1;
         return dummy.next;
     }
+
+
+    /**
+     * Quicksort Method.
+     * 
+     */
+    public ListNode sortList(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        ListNode dummy = new ListNode(-1);
+        ListNode cur = dummy;
+        dummy.next = head;
+        while (cur.next != null) {
+            cur = cur.next;
+        }
+        quicksort(dummy, cur);
+        return dummy.next;
+    }
+
+    private void quicksort(ListNode headPrev, ListNode tail) {
+        if (headPrev == tail || headPrev.next == tail) {
+            return;
+        }
+        ListNode bound = partition(headPrev, tail);
+        quicksort(headPrev, bound);
+        quicksort(bound, tail);
+    }
+
+    private ListNode partition(ListNode headPrev, ListNode tail) {
+        ListNode dummy1 = new ListNode(-1);
+        ListNode dummy2 = new ListNode(-1);
+        ListNode l1 = dummy1;
+        ListNode l2 = dummy2;
+        ListNode head = headPrev.next;
+        ListNode tailNext = tail.next;
+        int val = tail.val;
+        while (head != tail.next) {
+            if (head.val < val) {
+                l1.next = head;
+                l1 = l1.next;
+            } else {
+                l2.next = head;
+                l2 = l2.next;
+            }
+            head = head.next;
+        }
+        l2.next = tailNext;
+        l1.next = dummy2.next;
+        headPrev.next = dummy1.next;
+        return l1;
+    }
 }
 
 
-/*
-    // pending quicksort method
-    private ListNode partition(ListNode low, ListNode high) {
-        int pivot = high.val;
-        ListNode dummy = ListNode(-1);
-        dummy.next = low;
-        ListNode i = dummy;
-        ListNode j = dummy;
-        while (j.next != high) {
-            if (j.next.val < pivot) {
-                ListNode temp = i.next;
-                ListNode temp2 = j.next.next;
-                j.next.next = i.next.next;
-                i.next = j.next;
-                j.next = temp;
-                j.next.next = temp2;
-                i = i.next;
-            }
-            j = j.next;
-        }
-    }
-*/
+
+
+
+
+
