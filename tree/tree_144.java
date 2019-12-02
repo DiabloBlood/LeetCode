@@ -72,6 +72,8 @@ class Solution144 {
     }
 
     /**
+     * Iteration Method II
+     *
      * General Cases:
      *     1. stack.isEmpty()  && cur != null; ---> // there are to cases applied to this condition.
      *         a. First time enter to while loop, at that time, `cur == root`.
