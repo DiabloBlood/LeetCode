@@ -15,5 +15,15 @@ A skewed binary tree is a type of binary tree in which all the nodes have only e
 
 The `base case` returns a value without making any subsequent recursive calls. It does this for one or more special input values for which the function can be evaluated without recursion.
 
+
 Traversal
-	- 144, 94, 145, 110
+	- pre-order, in-order, post-order
+		- 144, 94, 145
+	- level order, BFS vs. DFS
+		- 107, 103
+
+Basic Properties of Tree
+    - height
+        - 110
+    - geometric
+        - 100, 101, 226
