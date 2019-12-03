@@ -4,7 +4,7 @@
 class Solution100 {
     /**
      * Method Tags:
-     *     1. Bottom Up.
+     *     1. Bottom Up. (Could stop at internal nodes)
      *
      * Base Cases:
      *     1. p == null && q == null; ---> return true; // `null` has two kind of cases, from leaf node or from non-leaf node.
