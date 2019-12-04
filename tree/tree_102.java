@@ -3,16 +3,16 @@
 
 class Solution102 {
     /**
-     * Recursion Method
+     * DFS Method
      *
      * Base Cases:
      *     1. node == null; ---> return; // just return
      *
      * General Cases:
-     *     1. result.size() == depth; ---> result.add(new ArrayList<>());
+     *     1. depth == result.size(); ---> result.add(new ArrayList<>());
      *                                     result.get(depth).add(node.val);
-     *     2. result.size() >  depth; ---> result.get(depth).add(node.val);
-     *     3. result.size() <  depth; ---> // impossible
+     *     2. depth <  result.size(); ---> result.get(depth).add(node.val);
+     *     3. depth >  result.size(); ---> // impossible
      *
      * Corner Cases:
      *     1. root == null; ---> doesn't need to handle, return value `result` is a empty array list.
@@ -32,8 +32,8 @@ class Solution102 {
         if (node == null) {
             return;
         }
-        // or result.size() - 1 < depth
-        if (result.size() == depth) {
+        // or depth > result.size() - 1
+        if (depth == result.size()) {
             result.add(new ArrayList<>());
         }
         result.get(depth).add(node.val);
@@ -50,17 +50,20 @@ class Solution102 {
      *        Ref. http://hg.openjdk.java.net/jdk9/jdk9/jdk/file/00cd9dc3c2b5/src/share/classes/java/util/Queue.java
      *     3. Is output space been counted into space complexity?
      *        The standard multi-tape Turing machine definition of space complexity does not count the intput and output.
-     *     4. Why queue space is `n/2` when use BFS method traverse a tree?
-     *        Assume tree has `n` nodes, height is `h`, last level nodes is `2^h`, total nodes is `2^(h + 1)`.
+     *        So the output space of result list of this problem will not counted into space complexity.
+     *        But the queue space for BFS usage will be counted.
+     *     4. Why the worst space complexity of queue is `n/2` when use BFS method to traverse a tree?
+     *        Assume input tree is a full binary tree which has `n` nodes, height is `h`, last layer nodes is `2^(h - 1)`,
+     *        total nodes is `1 + 2^1 + 2^2 + ... + 2^(h - 1) = 2^h`, so last layer nodes number is `n/2`.
      *
      * Corner Cases:
      *     1. root == null; ---> return new ArrayList<>();
-     *        // `ArrayDeque` class `addLast` method not allow `null` element,
+     *        // class `ArrayDeque` instance method `addLast` not allow `null` element (`queue.offer` method will call `ArrayDeuque.addLast` method),
      *           otherwise will throw `NullPointerException` when call `queue.offer` method.
      *
      * Time:  O(n), binary tree contains `n` nodes.
      * Space: best  O(1), for skewed binary tree. (Any shape)
-     *        worst O(n/2), full binary tree, complete binary tree is O(4/n) ~ O(n/2),
+     *        worst O(n/2), for full binary tree, complete binary tree is O(4/n) ~ O(n/2),
      *                      height-balanced binary tree is O(n/c), `c` is a number larger than `2`.
      *        avg   O(n/c), `c` is a number larger than `2`, for majority kinds of input trees, the last several layer nodes at O(n/c) level.
      */
