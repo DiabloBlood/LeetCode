@@ -6,17 +6,19 @@ class Solution107 {
      * BFS method.
      *
      * Key Points:
-     *     1. Why use ArrayDeque instead of LinkedList as Queue? Good performance of offer, poll actions.
+     *     1. Why use ArrayDeque instead of LinkedList as Queue? Good performance of `offer`, `poll` actions.
      *     2. Why use `offer, poll, peek` methods instead of `add, remove, element` methods of Queue interface?
      *        Ref. http://hg.openjdk.java.net/jdk9/jdk9/jdk/file/00cd9dc3c2b5/src/share/classes/java/util/Queue.java
-     *     3. Is output space been counted into space complexity?
+     *     3. Why the for loop need cache queue size first?
+     *        Since queue size will growth during for loop, cached size only represents tree nodes of this layer.
+     *     4. Is output space been counted into space complexity?
      *        The standard multi-tape Turing machine definition of space complexity does not count the intput and output.
      *        So the output space of result list of this problem will not counted into space complexity.
      *        But the queue space for BFS usage will be counted.
-     *     4. Why the worst space complexity of queue is `n/2` when use BFS method to traverse a tree?
+     *     5. Why the worst space complexity of queue is `n/2` when use BFS method to traverse a tree?
      *        Assume input tree is a full binary tree which has `n` nodes, height is `h`, last layer nodes is `2^(h - 1)`,
      *        total nodes is `1 + 2^1 + 2^2 + ... + 2^(h - 1) = 2^h`, so last layer nodes number is `n/2`.
-     *     5. Why use `result.add(0, list);` method for head insertion of linked list?
+     *     6. Why use `result.add(0, list);` method for head insertion of linked list?
      *        Since `List` interface doesn't has `addFirst` method.
      *
      * Corner Cases:
@@ -28,7 +30,7 @@ class Solution107 {
      * Space: best  O(1), for skewed binary tree. (Any shape)
      *        worst O(n/2), for full binary tree, complete binary tree is O(4/n) ~ O(n/2),
      *                      height-balanced binary tree is O(n/c), `c` is a number larger than `2`.
-     *        avg   O(n/c), `c` is a number larger than `2`, for majority kinds of input trees, the last several layer nodes at O(n/c) level.
+     *        avg   O(n/c), `c` is a number larger than `2`, for majority kinds of input trees, nodes number of last several layers at O(n/c) level.
      */
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
         if (root == null) {

@@ -3,9 +3,78 @@
 
 class Solution103 {
     /**
-     * BFS method:
-     * Time:  O(n)
-     * Space: best O(1) of flat list tree, worst O(n/2) of complete binary tree
+     * DFS Method
+     *
+     * Key Points:
+     *     1. Use `LinkedList` as inner list, for O(1) time insertion at head.
+     *     2. Use `int idx = depth % 2 != 0 ? 0 : list.size();` which inner linked list is reversed order.
+     *
+     * Base Cases:
+     *     1. node == null; ---> return; // just return
+     *
+     * General Cases:
+     *     1. depth == result.size(); ---> result.add(new LinkedList<>());
+     *                                     list.add(idx, node.val);
+     *     2. depth <  result.size(); ---> list.add(idx, node.val);
+     *     3. depth >  result.size(); ---> // impossible
+     *
+     * Corner Cases:
+     *     1. root == null; ---> doesn't need to handle, return value `result` is a empty array list.
+     *
+     * Time:  O(n), binary tree contains `n` nodes.
+     * Space: best  O(logn), for height-balanced binary tree, complete binary tree, full binary tree.
+     *        worst O(n), for skewed binary tree. (Any shape)
+     *        avg   O(logn)
+     */
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        helper(result, 0, root);
+        return result;
+    }
+
+    private void helper(List<List<Integer>> result, int depth, TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        if (depth == result.size()) {
+            result.add(new LinkedList<>());
+        }
+        List<Integer> list = result.get(depth);
+        int idx = depth % 2 != 0 ? 0 : list.size();
+        list.add(idx, node.val);
+        helper(result, depth + 1, node.left);
+        helper(result, depth + 1, node.right);
+    }
+
+    /**
+     * BFS method.
+     *
+     * Key Points:
+     *     1. Use `LinkedList` as inner list, for O(1) time insertion at head.
+     *     2. Use a boolean flag `odd` to control which inner linked list is reversed order.
+     *     3. `list.add(list.size(), cur.val);` is O(1) time.
+     *        Ref. http://hg.openjdk.java.net/jdk9/jdk9/jdk/file/9b8c96f96a0f/src/share/classes/java/util/LinkedList.java
+     *        (Source Code of add with index method, class LinkedList)
+     *                                  \|/
+     *        public void add(int index, E element) {
+     *            checkPositionIndex(index);
+     *
+     *            if (index == size)
+     *                linkLast(element);
+     *            else
+     *                linkBefore(element, node(index));
+     *        }
+     *
+     * Corner Cases:
+     *     1. root == null; ---> return new ArrayList<>();
+     *        // class `ArrayDeque` instance method `addLast` not allow `null` element (`queue.offer` method will call `ArrayDeuque.addLast` method),
+     *           otherwise will throw `NullPointerException` when call `queue.offer` method.
+     *
+     * Time:  O(n), binary tree contains `n` nodes.
+     * Space: best  O(1), for skewed binary tree. (Any shape)
+     *        worst O(n/2), for full binary tree, complete binary tree is O(4/n) ~ O(n/2),
+     *                      height-balanced binary tree is O(n/c), `c` is a number larger than `2`.
+     *        avg   O(n/c), `c` is a number larger than `2`, for majority kinds of input trees, nodes number of last several layers at O(n/c) level.
      */
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         if (root == null) {
@@ -14,17 +83,14 @@ class Solution103 {
         List<List<Integer>> result = new ArrayList<>();
         Queue<TreeNode> queue = new ArrayDeque<>();
         queue.offer(root);
-        boolean flag = true;
+        boolean odd = false;
         while (!queue.isEmpty()) {
-            int size = queue.size();
             List<Integer> list = new LinkedList<>();
+            int size = queue.size();
             for (int i = 0; i < size; i++) {
                 TreeNode cur = queue.poll();
-                if (flag) {
-                    list.add(cur.val);
-                } else {
-                    list.add(0, cur.val);
-                }
+                int idx = odd ? 0 : list.size();
+                list.add(idx, cur.val);
                 if (cur.left != null) {
                     queue.offer(cur.left);
                 }
@@ -33,36 +99,8 @@ class Solution103 {
                 }
             }
             result.add(list);
-            flag = !flag;
+            odd = !odd;
         }
         return result;
-    }
-
-    /**
-     * DFS method:
-     * Time:  O(n)
-     * Space: best O(logN) of complete binary tree, worst O(n) of flat list tree
-     */
-    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> result = new ArrayList<>();
-        helper(result, root, 0);
-        return result;
-    }
-    
-    private void helper(List<List<Integer>> result, TreeNode node, int depth) {
-        if (node == null) {
-            return;
-        }
-        if (result.size() == depth) {
-            result.add(new LinkedList<>());
-        }
-        List<Integer> list = result.get(depth);
-        if (depth % 2 == 0) {
-            list.add(node.val);
-        } else {
-            list.add(0, node.val);
-        }
-        helper(result, node.left, depth + 1);
-        helper(result, node.right, depth + 1);
     }
 }
