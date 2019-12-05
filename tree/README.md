@@ -17,13 +17,20 @@ The `base case` returns a value without making any subsequent recursive calls. I
 
 
 Traversal
-	- pre-order, in-order, post-order
-		- 144, 94, 145
-	- level order, BFS vs. DFS
-		- 102, 107, 103, 637
+    - pre-order, in-order, post-order
+        - 144, 94, 145
+    - level order, BFS vs. DFS
+        - 102, 107, 103, 637
 
 Basic Properties of Tree
+    - depth
+        - 104, 111
     - height
-        - 110
+        - 104, 110, 111
+    - path
+        - 257
     - geometric
         - 100, 101, 226
+
+BFS shortest path
+    - 111
