@@ -55,8 +55,8 @@ class Solution111 {
      *     1. Base on `height` property.
      *
      * Base Cases:
-     *     1. root == null; ---> return 0; // case 1: `null` from leaf node.
-     *                                     // case 2: `null` from a one-child parent node.
+     *     1. root == null; ---> return 0; // case 1: `null` from a leaf node.
+     *                                     // case 2: `null` from an one-child parent node.
      * General Cases:
      *     1. lh == 0 && rh == 0; return 1 + lh + rh;
      *     2. lh == 0 && rh >  0; return 1 + lh + rh;
