@@ -6,7 +6,7 @@ class Solution112 {
      * DFS Method
      *
      * Base Cases:
-     *     1. node == null; ---> return false; // case 1: `null` from a leaf node.
+     *     1. root == null; ---> return false; // case 1: `null` from a leaf node.
      *                                         // case 2: `null` from an one-child parent node.
      * General Cases:
      *     1. root.left == null && root.right == null && remain == 0; ---> return true;

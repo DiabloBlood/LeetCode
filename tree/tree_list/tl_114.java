@@ -36,18 +36,29 @@ class Solution114 {
     }
 
     /**
-     * Analysis:
-     * 1. Build result in pre-order. dummy->null, dummy->1->null, dummy->1->2->null.
-     * 
-     * Time:  O(n), the only way to get result is to traverse all the nodes.
-     * Space: Best  O(1) for flat list tree.
-     *        Worst O(logn) for balanced tree.
+     * Iteration Method (Pre-order, root->L->R)
+     *
+     * Problem Pitfalls:
+     *     1. `head.left = null` is very important.
+     *
+     * Problem Analysis:
+     *     1. Build result from pre-order. `dummy->null`, `dummy->1->null`, `dummy->1->2->null`.
+     *     2. `head` start from `dummy`, and always point to `tail` node.
+     *
+     * Corner Cases:
+     *     1. root == null; ---> return;
+     *        // `Deque` interface not allow `null` element, otherwise will throw `NullPointerException` when call `stack.push` method.
+     *
+     * Time:  O(n), binary tree contains `n` nodes.
+     * Space: best  O(1), for skewed binary tree (Any shape). 
+     *        worst O(logn), for height-balanced binary tree, complete binary tree, full binary tree.
+     *        avg   O(logn)
      */
     public void flatten(TreeNode root) {
         if (root == null) {
             return;
         }
-        TreeNode tail = new TreeNode(-1);
+        TreeNode head = new TreeNode(-1);
         Deque<TreeNode> stack = new ArrayDeque<>();
         stack.push(root);
         while (!stack.isEmpty()) {
@@ -58,9 +69,9 @@ class Solution114 {
             if (cur.left != null) {
                 stack.push(cur.left);
             }
-            tail.right = cur;
-            tail.left = null;
-            tail = cur;     //tail = tail.right
+            head.right = cur;
+            head.left = null;
+            head = head.right;
         }
     }
 
