@@ -2,79 +2,50 @@
 
 
 class Solution105 {
-
     /**
-     * Case Analysis:
-     *      3
-     *     / \
-     *    9  20
-     *      /  \
-     *     15   7
-     * Input: preorder [3,9,20,15,7]
-     *         inorder [9,3,15,20,7]
-     * 
-     * Notes: Assume no duplicates is very important!!!
-     * 1. Recursion buttom condition no need to check pre index out of bound.
-     * 
-     * Time:  O(n), every recursive call will generate a node.
-     * Space: O(n), O(n) for map, O(logn) ~ O(n) for implicit stack.
-     */
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
-        // Assume input is currect
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < inorder.length; i++) {
-            map.put(inorder[i], i);
-        }
-        return helper(map, 0, 0, inorder.length - 1, preorder, inorder);
-    }
-    
-    private TreeNode helper(Map<Integer, Integer> map, int pre, int inStart, int inEnd, int[] preorder, int[] inorder) {
-        if (inStart > inEnd) {
-            return null;
-        }
-        TreeNode root = new TreeNode(preorder[pre]);
-        int index = map.get(root.val);
-        root.left = helper(map, pre + 1, inStart, index - 1, preorder, inorder);
-        root.right = helper(map, pre + index - inStart + 1, index + 1, inEnd, preorder, inorder);
-        return root;
-    }
-
-        /**
-     * Case Analysis:
-     *      3       (0, 0, 4)
-     *     / \
-     *    9  20     (1, 0, 0)
-     *      /  \
-     *     15   7
-     * Input: preorder [3,9,20,15,7]
-     *         inorder [9,3,15,20,7]
-     *
-     *          3
-     *      /       \
-     *     9        --20--
-     *   /   \     /
-     * null null   15        7
-     *           /    \      /   \
-     *         null  null  null null
      * Problem Pitfalls:
-     *     1. No duplicates is very important, otherwise it's impossible use a hashmap
+     *     1. No duplicates is very important, otherwise it's impossible to use a hashmap
      *        to store `value->index` relationship of `inorder` array.
      *
      * Problem Analysis:
-     *     1.
-     * Notes: Assume no duplicates is very important!!!
-     * 1. Recursion buttom condition no need to check pre index out of bound.
-     * 
-     * Time:  O(n), every recursive call will generate a node.
-     * Space: O(n), O(n) for map, O(logn) ~ O(n) for implicit stack.
-     */
-    /**
+     *     1. Create a node for every recursive all, use a hashmap to store `value->index` relationship of `inorder` array.
+     *     2. Why base cases not check if `pre` is out of bound, only check if `inStart > inEnd`?
+     *        Please see as follow, only `inStart > inEnd` determines a node is `null`.
+     *
+     *        Input: preorder [3, 9, 20, 15, 7]
+     *               inorder  [9, 3, 15, 20, 7]
+     *
+     *               ----3----                             -------(0, 0, 4)-------
+     *             /           \                         /                         \
+     *            9          --20--                 (1, 0, 0)              ----(2, 2, 4)----
+     *          /   \      /        \              /         \           /                   \
+     *        null null  15          7        (2, 0, -1) (2, 0, -1)  (3, 2, 2)            (4, 4, 4)
+     *                 /    \      /   \                            /         \          /         \
+     *               null  null  null null                      (4, 2, 1) (4, 3, 2)  (5, 4, 3) (5, 5, 4)
+     *
+     * Base Cases:
+     *     1. inStart > inEnd; ---> return null; // please refer explaination of [Problem Analysis 2].
+     *
      * Corner Cases:
-     *     1. preorder.length == inorder.length, array `preorder and `inorder` both are valid is pre-guaranteed.
-     *     2. preorder == null && inorder == null; ---> return null;
-     *     3. preorder.length == 0 && inorder.length == 0; ---> return null;
+     *     1 . preorder.length == inorder.length && from array `preorder` and array `inorder` cannot re-build a binary tree;
+     *        ---> // impossible, situation that array `preorder` and `inorder` both are valid is pre-guaranteed.
+     *     2. preorder.length != inorder.length; ---> return null;
+     *     3. preorder == null && inorder == null; ---> return null;
+     *     4. preorder.length == 0 && inorder.length == 0; ---> // doesn't need to handled, already been handled by base cases.
+     *
+     * Time:  O(n), every recursive call will create a node, binary tree has `n` nodes.
+     *              if don't use hashmap, every recursive call will has O(n) overhead to find root `idx` of `inorder` array,
+     *              then finally time complexity rises to O(n^2).
+     * Space: best  O(n + logn), for height-balanced binary tree, complete binary tree, full binary tree,
+     *                           hashmap takes `n`, implicit stack takes `logn`.
+     *        worst O(2n), for skewed binary tree (Any shape), hashmap takes `n`, implicit stack takes `n`.
+     *        avg   O(n + logn)
      */
+
     public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if (preorder == null || inorder == null || preorder.length != inorder.length) {
+            return null;
+        }
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < inorder.length; i++) {
             map.put(inorder[i], i);
@@ -90,25 +61,6 @@ class Solution105 {
         int idx = map.get(preorder[pre]);
         root.left = helper(map, pre + 1, inStart, idx - 1, preorder, inorder);
         root.right = helper(map, pre + idx - inStart + 1, idx + 1, inEnd, preorder, inorder);
-        return root;
-    }
-
-    public TreeNode buildTree(int[] inorder, int[] postorder) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < inorder.length; i++) {
-            map.put(inorder[i], i);
-        }
-        return helper(map, postorder.length - 1, 0, inorder.length - 1, inorder, postorder);
-    }
-
-    private TreeNode helper(Map<Integer, Integer> map, int post, int inStart, int inEnd, int[] inorder, int[] postorder) {
-        if (inStart > inEnd) {
-            return null;
-        }
-        TreeNode root = new TreeNode(postorder[post]);
-        int idx = map.get(postorder[post]);
-        root.left = helper(map, post - inEnd + idx - 1, inStart, idx - 1, inorder, postorder);
-        root.right = helper(map, post - 1, idx + 1, inEnd, inorder, postorder);
         return root;
     }
 }
