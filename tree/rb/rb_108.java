@@ -7,6 +7,7 @@ class Solution108 {
      *     1. What is height-balanced BST? Sub-tree height diff no more than 1.
      *     2. BST property, left tree < root.val, right tree > root.val. This array is sorted.
      *     3. How about this array has duplicates? Then become left tree <= root.val, right tree >= root.val.
+     *     4. The in-order traversal result of a BST is a sorted array.
      *
      * Problem Analysis:
      *     1. Re-build this tree from pre-order.
@@ -48,7 +49,7 @@ class Solution108 {
      *     1. start > end; ---> return null;
      *
      * Corner Cases:
-     *     1. nums == null; ---> return null;
+     *     1. nums == null; ---> return null; // otherwise `nums.length - 1` will throw `NullPointerException`.
      *
      * Time:  O(n), every recursive call will create a node.
      * Space: O(logn), since this BST is a hight-balanced BST, tree height must be `logn`.
@@ -72,7 +73,7 @@ class Solution108 {
     }
 
     /**
-     * Build from inorder traversal.
+     * Build from in-order traversal.
      *
      * Notes:
      *     1. It is ok not to use auto increment idx.
