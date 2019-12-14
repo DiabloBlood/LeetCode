@@ -9,12 +9,15 @@ class Solution104 {
      *     1. The `depth` of a node is the number of edges from the node to the tree's root node. A root node will have a depth of 0.
      *     2. However, this problem `depth` index start from `1`.
      *
+     * Base Cases:
+     *     1. node == null; ---> return; // just return.
+     *
      * Corner Cases:
      *     1. root == null; ---> doesn't need to handle, return value `result[0]` is `0`.
      *
      * Time:  O(n), binary tree contains `n` nodes.
      * Space: best  O(logn), for height-balanced binary tree, complete binary tree, full binary tree.
-     *        worst O(n), for skewed binary tree. (Any shape)
+     *        worst O(n), for skewed binary tree (Any Shape).
      *        avg   O(logn)
      */
     public int maxDepth(TreeNode root) {
@@ -39,6 +42,9 @@ class Solution104 {
      *     1.The `height` of a node is the number of edges on the longest path from the node to a leaf. A leaf node will have a height of 0.
      *     2. However, this problem `height` of `leaf` is `1`, `height` of `null` is `0`.
      *     3. The `maximum depth` of a binary tree equal to `height` of this binary tree.
+     *
+     * Base Cases:
+     *     1. root == null; ---> return 0; // height of leaf is `1`, `null` of leaf is `0`.
      *
      * Corner Cases:
      *     1. root == null; ---> doesn't need to handle, return value is `0`.

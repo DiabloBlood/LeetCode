@@ -113,9 +113,6 @@ class Solution145 {
      * Space: best O(logn) of complete binary tree, worst O(n) of flat list tree.
      */
     public List<Integer> postorderTraversal(TreeNode root) {
-        if (root == null) {
-            return new ArrayList<>();
-        }
         List<Integer> result = new LinkedList<>();
         Deque<TreeNode> stack = new ArrayDeque<>();
         TreeNode cur = root;

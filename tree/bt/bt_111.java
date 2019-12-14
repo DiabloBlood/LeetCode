@@ -71,7 +71,7 @@ class Solution111 {
      *
      * Time:  O(n), binary tree contains `n` nodes, must traverse all `n` nodes to get result.
      * Space: best  O(logn), for height-balanced binary tree, complete binary tree, full binary tree.
-     *        worst O(n), for skewed binary tree. (Any shape)
+     *        worst O(n), for skewed binary tree (Any shape).
      *        avg   O(logn)
      */
     public int minDepth(TreeNode root) {
@@ -96,14 +96,15 @@ class Solution111 {
      *        // for this case, node is a leaf, leaf node should calculate minimum depth.
      *
      * General Cases:
-     *     1. node != null && (node.left != null || node.right != null); ---> // do nothing, just recursive call left and right.
+     *     1. node != null && (node.left != null || node.right != null);
+     *        ---> // not a leaf node, do nothing, just recursive call left and right.
      *
      * Corner Cases:
      *     1. root == null; ---> return 0; // must be handled, since if not handle, return value is `Integer.MAX_VALUE`.
      *
      * Time:  O(n), binary tree contains `n` nodes, must traverse all `n` nodes to get result.
      * Space: best  O(logn), for height-balanced binary tree, complete binary tree, full binary tree.
-     *        worst O(n), for skewed binary tree. (Any shape)
+     *        worst O(n), for skewed binary tree (Any Shape).
      *        avg   O(logn)
      */
     public int minDepth(TreeNode root) {
