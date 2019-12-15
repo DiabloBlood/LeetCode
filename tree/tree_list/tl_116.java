@@ -3,14 +3,24 @@
 
 class Solution116 {
     /**
-     * Case Analysis:
-     * Notes: `head` represents the level head (the left most start node) of each level.
-     * 1. `root == null` corner case should be handle,
-     *    to avoid while loop `head.left != null` condition throw `NullPointerException`.
-     * 2. `head.left != null` to avoid `cur.next.left` throw `NullPointerException`.
+     * BFS method (queue not used)
      *
-     * Time:  O(n), the only way to get result is to traverse all the nodes.
-     * Space: O(1)
+     * Problem Analysis:
+     *     1. It's very important that the input tree is a perfect binary tree (full binary tree).
+     *     2. `head` represents the level head (the leftmost start node) of each level.
+     *
+     * General Cases:
+     *     outer while loop:
+     *         1. use `head.left != null` as condition, to avoid `cur.left.next` throw `NullPointerException`.
+     *     inner while loop:
+     *         1. cur.next == null; ---> // do nothing
+     *         2. cur.next != null; ---> cur.right.next = cur.next.left;
+     *
+     * Corner Cases:
+     *     1. root == null; ---> return null; // otherwise `head.left != null` will throw `NullPointerException`.
+     *
+     * Time:  O(n), binary tree has `n` nodes, the only way to get result is to traverse all the nodes.
+     * Space: O(1), no any extra space been used.
      */
     public Node connect(Node root) {
         if (root == null) {
@@ -25,18 +35,21 @@ class Solution116 {
                 cur = cur.next;
             }
             head = head.left;
-        } 
+        }
         return root;
     }
 
     /**
-     * Case Analysis:
-     * 1. `root == null` corner case should be handle,
-     *     to avoid recursion bottom condition `node.left == null` throw `NullPointerException`.
-     * 2. `node.left != null` to avoid `node.left.next` throw `NullPointerException`.
+     * DFS Method
      *
-     * Time:  O(n), the only way to get result is to traverse all the nodes.
-     * Space: O(logn)
+     * Base Cases:
+     *     1. node.left == null; ---> return; // to avoid `node.left.next` throw `NullPointerException`.
+     *
+     * Corner Cases:
+     *     1. root == null; ---> return null; // otherwise base case `node.left != null` will throw `NullPointerException`.
+     *
+     * Time:  O(n),  binary tree has `n` nodes, the only way to get result is to traverse all the nodes.
+     * Space: O(logn), the height of perfect binary tree (full binary tree) is `logn`.
      */
     public Node connect(Node root) {
         if (root == null) {
