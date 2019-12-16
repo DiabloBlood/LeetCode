@@ -60,6 +60,10 @@ class Solution107 {
     /**
      * DFS Method
      *
+     * Notes:
+     *     1. Why use ArrayList as outer list and finally reverse it?
+     *        Since if use linkedlist, `result.get(depth).add(node.val)` is O(n) time instead of O(1).
+     *
      * Base Cases:
      *     1. node == null; ---> return; // just return
      *

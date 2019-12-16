@@ -23,7 +23,7 @@ class Solution103 {
      *
      * Time:  O(n), binary tree contains `n` nodes.
      * Space: best  O(logn), for height-balanced binary tree, complete binary tree, full binary tree.
-     *        worst O(n), for skewed binary tree. (Any shape)
+     *        worst O(n), for skewed binary tree (Any shape).
      *        avg   O(logn)
      */
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
@@ -71,7 +71,7 @@ class Solution103 {
      *           otherwise will throw `NullPointerException` when call `queue.offer` method.
      *
      * Time:  O(n), binary tree contains `n` nodes.
-     * Space: best  O(1), for skewed binary tree. (Any shape)
+     * Space: best  O(1), for skewed binary tree (Any shape).
      *        worst O(n/2), for full binary tree, complete binary tree is O(4/n) ~ O(n/2),
      *                      height-balanced binary tree is O(n/c), `c` is a number larger than `2`.
      *        avg   O(n/c), `c` is a number larger than `2`, for majority kinds of input trees, nodes number of last several layers at O(n/c) level.
