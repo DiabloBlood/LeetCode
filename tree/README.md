@@ -23,7 +23,7 @@ Traversal
     - pre-order, in-order, post-order
         - 144, 94, 145, 114
     - level order, BFS vs. DFS
-        - 102, 107, 103, 637
+        - 102, 107, 103, 637, 199
     - re-build from pre-order, in-order, post-order
         - 105, 106, 108, 109
 
@@ -33,7 +33,7 @@ Basic Properties of Tree
     - height
         - 104, 110, 111
     - path
-        - 112, 113, 257
+        - 112, 113, 257, 199
     - geometric
         - 100, 101, 226
     - tree list

@@ -2,7 +2,7 @@
 
 
 class Solution637 {
-	/**
+    /**
      * BFS method.
      *
      * Key Points:
@@ -15,7 +15,7 @@ class Solution637 {
      *           otherwise will throw `NullPointerException` when call `queue.offer` method.
      *
      * Time:  O(n), binary tree contains `n` nodes.
-     * Space: best  O(1), for skewed binary tree. (Any shape)
+     * Space: best  O(1), for skewed binary tree (Any shape).
      *        worst O(n/2), for full binary tree, complete binary tree is O(4/n) ~ O(n/2),
      *                      height-balanced binary tree is O(n/c), `c` is a number larger than `2`.
      *        avg   O(n/c), `c` is a number larger than `2`, for majority kinds of input trees, nodes number of last several layers at O(n/c) level.
@@ -61,7 +61,7 @@ class Solution637 {
      *        avg   O(n + logn)
      * Space: best  O(2*logn), for height-balanced binary tree, complete binary tree, full binary tree.
      *                         `counts` list takes O(logn) space, and implicit stack also takes O(logn) space.
-     *        worst O(2n), for skewed binary tree. (Any shape)
+     *        worst O(2n), for skewed binary tree (Any shape).
      *                     `counts` list takes O(n) space, and implicit stack also takes O(n) space.
      *        avg   O(2*logn)
      */
