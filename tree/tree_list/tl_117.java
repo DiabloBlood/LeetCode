@@ -3,7 +3,7 @@
 
 class Solution117 {
     /**
-     * BFS method (queue not used). This problem cannot solved by DFS in O(n) time.
+     * BFS method (queue not used).
      *
      * Problem Analysis:
      *     1. The input tree is not a full binary tree, so we cannot use the solution of tree_106.java.
@@ -44,5 +44,51 @@ class Solution117 {
             dummy.next = null;
         }
         return root;
+    }
+
+    /**
+     * DFS Method
+     *
+     * Problem Analysis:
+     *     1. Use a path list to store the current tail node for each layer.
+     *     2. Extra space of path list will be used.
+     *
+     * Base Cases:
+     *     1. node == null; ---> return; // just return
+     *
+     * General Cases:
+     *     1. depth == result.size(); ---> list.add(node); // add the leftmost node of layer depth to path list
+     *     2. depth <  result.size(); ---> list.get(depth).next = node;
+     *                                     list.set(depth, node); // make node at position depth as current tail node.
+     *     3. depth >  result.size(); ---> // impossible
+     *
+     * Corner Cases:
+     *     1. root == null; ---> // doesn't need to handle, already handled by base cases,
+     *                              return value `root` is `null`;
+     *
+     * Time:  O(n), binary tree contains `n` nodes, the only way to get result is to traverse all the nodes.
+     * Space: best  O(2logn), for height-balanced binary tree, complete binary tree, full binary tree.
+     *                        Path list takes `logn`, implicit stack takes another `logn`.
+     *        worst O(2n), for skewed binary tree (Any shape). Path list takes `n`, implicit stack takes another `n`;
+     *        avg   O(2logn)
+     */
+    public Node connect(Node root) {
+        helper(new ArrayList<>(), 0, root);
+        return root;
+    }
+
+    private void helper(List<Node> list, int depth, Node node) {
+        if (node == null) {
+            return;
+        }
+        if (depth == list.size()) {
+            // reach the leftmost node of layer depth, add it as `head`
+            list.add(node);
+        } else {
+            list.get(depth).next = node;
+            list.set(depth, node);
+        }
+        helper(list, depth + 1, node.left);
+        helper(list, depth + 1, node.right);
     }
 }
