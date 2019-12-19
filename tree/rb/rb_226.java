@@ -64,15 +64,27 @@ class Solution226 {
     }
 
     /**
-     * Time:  O(n)
-     * Space: Best O(1) of flat list tree
-     *        Worst O(n) of balanced tree
+     * BFS method.
+     *
+     * Problem Analysis:
+     *     1. Use BFS method to swap `cur.left` and `cur.right`.
+     *
+     * Corner Cases:
+     *     1. root == null; ---> return null;
+     *        // class `ArrayDeque` instance method `addLast` not allow `null` element (`queue.offer` method will call `ArrayDeuque.addLast` method),
+     *           otherwise will throw `NullPointerException` when call `queue.offer` method.
+     *
+     * Time:  O(n), binary tree contains `n` nodes.
+     * Space: best  O(1), for skewed binary tree (Any shape).
+     *        worst O(n/2), for full binary tree, complete binary tree is O(4/n) ~ O(n/2),
+     *                      height-balanced binary tree is O(n/c), `c` is a number larger than `2`.
+     *        avg   O(n/c), `c` is a number larger than `2`, for majority kinds of input trees, nodes number of last several layers at O(n/c) level.
      */
     public TreeNode invertTree(TreeNode root) {
         if (root == null) {
             return null;
         }
-        Deque<TreeNode> queue = new ArrayDeque<>();
+        Queue<TreeNode> queue = new ArrayDeque<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
             TreeNode cur = queue.poll();
