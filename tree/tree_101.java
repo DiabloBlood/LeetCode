@@ -7,11 +7,13 @@ class Solution101 {
      *     1. Bottom Up.
      *
      * Problem Analysis:
-     *     1. If invert right subtree first (tree 226), the this problem been reduced to a same tree problem. (tree 100)
+     *     1. If we invert the right subtree first (like tree_226.java), then this problem converted to a same tree problem. (tree_100.java)
      *     2. In fact, we don't need to invert a subtree, just recursively call isSame(p.left, q.right) and isSame(p.right, q.left).
+     *     3. This problem could get result without traverse the whole tree.
      *
      * Base Cases:
-     *     1. p == null && q == null; ---> return true; // `null` has two kind of cases, from leaf node or from non-leaf node.
+     *     1. p == null && q == null; ---> return true; // case 1: `null` from a leaf node.
+     *                                                  // case 2: `null` from a one-child parent node.
      *     2. p == null && q != null; ---> return false;
      *     3. p != null && q == null; ---> return false;
      *     4. p != null && q != null && p.val != q.val; ---> return false;
@@ -30,11 +32,11 @@ class Solution101 {
      * Corner Cases:
      *     1. root == null; ---> return true; // must be handled, otherwise `root.left` and `root.right` will throw `NullPointerException`.
      * 
-     * Time:  best  O(1), detected `p` and `q` is not symmetric at root level.
+     * Time:  best  O(1), detected `p` and `q` is not symmetric at root level (could get result without traverse the whole tree).
      *        worst O(n/2), each subtree contains `n/2` nodes.
-     * Space: best  O(1), detected `p` and `q` is not symmetric at root level.
+     * Space: best  O(1), detected `p` and `q` is not symmetric at root level (could get result without traverse the whole tree).
      *        avg   O(logn), for height-balanced binary tree, complete binary tree, full binary tree.
-     *        worst O(n/2), for each subtree is a skewed binary tree. (Any shape)
+     *        worst O(n/2), for each subtree is a skewed binary tree (Any shape).
      */
     public boolean isSymmetric(TreeNode root) {
         if (root == null) {
@@ -55,10 +57,11 @@ class Solution101 {
 
     /**
      * Method Tags:
-     *     1. Explicit Stack.
+     *     1. Iteration Method (Use explicit stack).
      *
      * Base Cases:
-     *     1. p == null && q == null; ---> continue; // `null` has two kind of cases, from leaf node or from non-leaf node.
+     *     1. p == null && q == null; ---> continue; // case 1: `null` from a leaf node.
+     *                                               // case 2: `null` from a one-child parent node.
      *        // just `continue` if us explicit stack, to avoid push any node to stack equal to return from the bottom of recursion tree.
      *     2. p == null && q != null; ---> return false;
      *     3. p != null && q == null; ---> return false;
@@ -71,13 +74,13 @@ class Solution101 {
      *     1. just push nodes to stack.
      *
      * Corner Cases:
-     *     1. root == null; ---> return true; // must be handled, otherwise `root.left` and `root.right` will throw `NullPointerException`.
+     *     1. root == null; ---> return true; // must be handled, otherwise `root.left` or `root.right` will throw `NullPointerException`.
      *
-     * Time:  best  O(1), detected `p` and `q` is not symmetric at root level.
+     * Time:  best  O(1), detected `p` and `q` is not symmetric at root level (could get result without traverse the whole tree).
      *        worst O(n/2), each subtree contains `n/2` nodes.
      *        avg   O(n)
-     * Space: best  O(1), detected `p` and `q` is not symmetric at root level.
-     *        best  O(1), for each subtree is a skewed binary tree. (Any shape)
+     * Space: best  O(1), detected `p` and `q` is not symmetric at root level (could get result without traverse the whole tree).
+     *        best  O(1), for each subtree is a skewed binary tree (Any shape).
      *        worst O(logn), for height-balanced binary tree, complete binary tree, full binary tree.
      *        avg   O(logn)
      */
