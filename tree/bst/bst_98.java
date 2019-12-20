@@ -4,7 +4,7 @@
 class Solution98 {
     /**
      * Key Points:
-     *     1. BST property, all node of left subtree < root.val, all nodes of right subtree > root.val,
+     *     1. BST property, all nodes of left subtree < root.val, all nodes of right subtree > root.val,
      *        and this is a recursive definition.
      *     2. Type of `Long.MAX_VALUE` is `long`, `node.val <= min` expression convert `node.val` to `long` type.
      *
