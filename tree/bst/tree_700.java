@@ -5,7 +5,7 @@ class Solution700 {
     /**
      * Problem Analysis:
      *     1. BST property, all nodes of left subtree < root.val, all nodes of right subtree > root.val,
-     *        and this is a recursive definition. 
+     *        and this is a recursive definition.
      * 
      * General Cases:
      *     1. root == null;                    ---> while loop break;
@@ -17,8 +17,7 @@ class Solution700 {
      *     1. root = null; ---> // doesn't need to handle, while loop will be skipped and return value is `null`.
      * 
      * Time:  best  O(1), could find result very early, branch pruning.
-     *        best  O(logn), for height-balanced BST, complete BST, full BST.
-     *                       Not traverse all nodes, only traverse a path, branch pruning.
+     *        best  O(logn), for height-balanced BST, complete BST, full BST. Not traverse all nodes, only traverse a path, branch pruning.
      *        worst O(n), for skewed BST (Any shape).
      *        avg   O(logn)
      * Space:       O(1), no extra space used.
@@ -33,7 +32,7 @@ class Solution700 {
     /**
      * Problem Analysis:
      *     1. BST property, all nodes of left subtree < root.val, all nodes of right subtree > root.val,
-     *        and this is a recursive definition. 
+     *        and this is a recursive definition.
      *
      * Base Cases:
      *     1. root == null;    ---> return null; // which means not find a node that `node.val == val`.
@@ -47,8 +46,7 @@ class Solution700 {
      *     1. root = null; ---> // doesn't need to handle, already handled by base cases.
      * 
      * Time:  best  O(1), could find result very early, branch pruning.
-     *        best  O(logn), for height-balanced BST, complete BST, full BST.
-     *                       Not traverse all nodes, only traverse a path, branch pruning.
+     *        best  O(logn), for height-balanced BST, complete BST, full BST. Not traverse all nodes, only traverse a path, branch pruning.
      *        worst O(n), for skewed BST (Any shape).
      *        avg   O(logn)
      * Space: best  O(1), could find result very early, branch pruning.

@@ -38,7 +38,7 @@ Basic Properties of Tree
     - tree list
         - 116, 117, 156
 BST
-    - 98
+    - 98, 700, 270
 BFS shortest path
     - 111
 
