@@ -45,7 +45,7 @@ class Solution107 {
         if (node.left == null && node.right == null) {
             StringBuilder sb = new StringBuilder();
             String prefix = "";
-            for(int val: path) {
+            for (int val: path) {
                 sb.append(prefix).append(val);
                 prefix = "->";
             }

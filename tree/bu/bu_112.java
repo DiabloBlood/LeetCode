@@ -16,12 +16,12 @@ class Solution112 {
      * Corner Cases:
      *     1. root == null; ---> doesn't need to handle, base cases already handle this case.
      *
-     * Time:  best  O(1), could detect final result very early, `||` operator may also short cut another recursive call.
+     * Time:  best  O(1), could detect final result very early, `||` operator may also short cut another recursive call, branch pruning.
      *        worst O(n), case 1: this tree doesn't has a path sum equal to input `sum`.
      *                    case 2: only the right most path's sum equal to input `sum`.
      *        avg   O(c*n), 0 < c <= 1, avg time should between O(1) ~ O(n).
      * Space: best  O(logn), for height-balanced binary tree, complete binary tree, full binary tree.
-     *        worst O(n), for skewed binary tree. (Any shape)
+     *        worst O(n), for skewed binary tree (Any shape).
      *        avg   O(logn)
      */
     public boolean hasPathSum(TreeNode root, int sum) {
