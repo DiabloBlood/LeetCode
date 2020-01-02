@@ -3,10 +3,12 @@
 
 class Solution109 {
     /**
+     * In-order DFS method. 
+     *
      * Notes:
      *     1. What is height-balanced BST? Sub-tree height diff no more than 1.
-     *     2. BST property, left tree < root.val, right tree > root.val. This array is sorted.
-     *     3. How about this array has duplicates? Then become left tree <= root.val, right tree >= root.val.
+     *     2. BST property, left subtree < root.val, right subtree > root.val.
+     *     3. How about this array has duplicates? Then become left subtree <= root.val, right subtree >= root.val.
      *     4. The in-order traversal result of a BST is a sorted array.
      *
      * Problem Analysis:
@@ -23,7 +25,7 @@ class Solution109 {
      *             /   \       /   \                /         \          /         \
      *           null null   null null           (1, 0)     (2, 1)    (4, 3)     (5, 4)
      *
-     *     3. Why every recursive call use `mid` as `root` will build a height-balanced BST?
+     *     3. Why every recursive call use `mid` as `root` and from this we could build a height-balanced BST?
      *        Use mathmetical induction to prove this theorem, please see as follow, we could know that when `k >= 1`, if array has `2k + 1`
      *        elements, tree structure is `k, root, k`, if array has `2k + 2` elements, tree structure is ` k, root, k + 1`, so the difference
      *        of height of left subtree and right subtree at most is `floor(log(2k+2)) - floor(log(2k+1))`, which is only `0` or `1`.
@@ -52,7 +54,7 @@ class Solution109 {
      * Corner Cases:
      *     1. head == null; ---> // doesn't need to handle, base cases already handled.
      *
-     * Time:  O(n), every recursive call will create a node.
+     * Time:  O(2n), get size is O(n), build tree is O(n), since every recursive call will create a node, binary tree has `n` nodes.
      * Space: O(logn), since this BST is a hight-balanced BST, tree height must be `logn`.
      */
     public TreeNode sortedListToBST(ListNode head) {
@@ -88,7 +90,7 @@ class Solution109 {
      * Corner Cases:
      *     1. head == null; ---> // doesn't need to handle, base cases already handled.
      *
-     * Time:  O(n), every recursive call will create a node.
+     * Time:  O(2n), get size is O(n), build tree is O(n), since every recursive call will create a node, binary tree has `n` nodes.
      * Space: O(logn), since this BST is a hight-balanced BST, tree height must be `logn`.
      */
     public TreeNode sortedListToBST(ListNode head) {
@@ -123,7 +125,7 @@ class Solution109 {
      * Corner Cases:
      *     1. head == null; ---> // doesn't need to handle, base cases already handled.
      *
-     * Time:  O(n), every recursive call will create a node.
+     * Time:  O(2n), get size is O(n), build tree is O(n), since every recursive call will create a node, binary tree has `n` nodes.
      * Space: O(logn), since this BST is a hight-balanced BST, tree height must be `logn`.
      */
     private ListNode cur;
@@ -155,8 +157,8 @@ class Solution109 {
      * Notes: when head is just one list node. `root.left = sortedListToBST(head);` will lead to endless loop.
      *        That's why if `prev == null`, set `head = null`.
      * 
-     * Time:  O(n*logn), find middle has extra operation.
-     * Space: O(logn), implicit stack, this is a balanced tree.
+     * Time:  O(nlogn), find middle has extra operation.
+     * Space: O(logn), since this BST is a hight-balanced BST, tree height must be `logn`.
      */
     public TreeNode sortedListToBST(ListNode head) {
         if (head == null) {
