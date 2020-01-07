@@ -30,7 +30,7 @@ Basic Properties of Tree
     - depth
         - 104, 111
     - height
-        - 104, 110, 111
+        - 104, 110, 366, 111
     - path
         - 112, 113, 129, 404, 257, 199
     - geometric
