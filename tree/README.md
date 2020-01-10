@@ -21,7 +21,7 @@ https://stackoverflow.com/questions/2709030/explain-bfs-and-dfs-in-terms-of-back
 
 Traversal
     - pre-order, in-order, post-order
-        - 144, 94, 145, 114, 230
+        - 144, 94, 145, 426, 114, 230
     - level order, BFS vs. DFS
         - 102, 107, 103, 637, 199, 116, 117
     - re-build from pre-order, in-order, post-order
@@ -36,7 +36,7 @@ Basic Properties of Tree
     - geometric
         - 100, 101, 226
     - tree list
-        - 116, 117, 156
+        - 116, 117, 156, 426
 BST
     - 98, 700, 270, 230
 BFS shortest path
@@ -45,10 +45,10 @@ By data structures
     - Map
         - 105, 106
     - stack, sliding window
-        - 654
+        - 654, 1008
 
 
 // 144, 94, 145, 100, 104, 102, 107, 103, 637, 111, 112, 105, 106, 108, 109, 116, 117, 156, 199, 101, 226, 98, 700, 270, 257, 129, 404
-// 113, 124, 222, 230, 235, 236, 250, 255, 366, 1130
+// 113, 124, 222, 230, 235, 236, 250, 255, 366, 1130-dp
 // 114, 654, 669
-// 95, 96(dp), 426, 1008
+// 95, 96(dp), 1008
