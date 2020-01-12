@@ -12,7 +12,7 @@ class Solution257 {
      *
      * Base Cases:
      *     1. node == null; ---> return; // case 1: `null` from a one-child parent.
-     *                                   // case 2: `null` from a leaf node.
+     *                                      case 2: `null` from a leaf node.
      *
      * General Cases:
      *     1. node.left == null && node.right == null; ---> result.add(path.toString());
@@ -22,7 +22,7 @@ class Solution257 {
      *     1. root == null; ---> // doesn't need to handle, already handled by base cases.
      *
      * Time:  best  O(2n), for skewed binary tree (Any shape), skewed tree only has one leaf node, the largest path size is `n`,
-     *                     DFS takes O(n) time, generate path string takes O(n) time (`path.toString()` method  takes O(n) time).
+     *                     DFS takes `n` time, generate path string, `path.toString()` method takes `n` time.
      *        worst O(n + (n/2)*logn), for full binary tree and complete binary tree, in this case tree has `n/2` leaf nodes,
      *                                 the largest path size is `logn`, DFS takes O(n) time, takes O((n/2)*logn) time.
      *        avg   O(n + (n/c)*logn), `c` is larger than `2`.
@@ -60,103 +60,107 @@ class Solution257 {
      *     1. Why use `paths.offer(new StringBuilder(Integer.toString(root.val)));`?
      *        Since constructor `StringBuilder(int capacity)`, if use `root.val` directly, `root.val` will as capacity.
      *
-     * Key Points:
-     *     1. Need another queue `paths` to track all the path to current node.
+     * Notes:
+     *     1. result size is O(n) ~ O((n/2)*logn), only count `node.val`, not count `->`.
      *
      * General Cases:
-     *     1. cur.left == null && cur.right == null; ---> result.add(curPath.toString());
-     *     2. cur.left != null || cur.right != null; ---> // internal node, do nothing
+     *     1. cur.node.left == null && cur.node.right == null; ---> result.add(cur.path.toString());
+     *     2. cur.node.left != null || cur.node.right != null; ---> // pass, must pass, this case cannot determine final result.
      *
      * Corner Cases:
-     *     1. root == null; ---> return new ArrayList<>();
-     *        // class `ArrayDeque` instance method `addLast` not allow `null` element (`queue.offer` method will call `ArrayDeuque.addLast` method),
-     *           otherwise will throw `NullPointerException` when call `queue.offer` method.
+     *     1. root == null; ---> return new ArrayList<>(); // otherwise `cur.path.append(prefix).append(cur.node.val);` will throw `NullPointerException`.
      *
      * Time:  best  O(2n), for skewed binary tree (Any shape), skewed tree only has one leaf node, the largest path size is `n`,
-     *                     BFS takes O(n) time, generate path string takes O(n) time (`path.toString()` method  takes O(n)).
+     *                     BFS takes `n` time, generate path string, `path.toString()` method takes `n` time.
      *        worst O(n*(logn)^2), for full binary tree and complete binary tree, assume height is `h`, then for layer `k` it's need
-     *                        `(k/2)*2^k` operations, sum sigma (0, h - 1)((k/2)*2^k) <= (h^2)*(2*h) = n*(logn)^2
+     *                             `(k/2)*2^k` operations, sum sigma (0, h - 1)((k/2)*2^k) <= (h^2)*(2^h) = n*(logn)^2
      *        avg   O(n*(logn)^2)
-     * Space: best  O(n), for skewed binary tree (Any shape), path takes O(n) space, queue takes O(1) space.
-     *        worst O(nlogn), for full binary tree and complete binary tree, queue `paths` need to store all path stringbuilder.
-     *        avg   O(2logn)
-     * Notes: result size is O(n) ~ O((n/2)*logn), only count `node.val`, not count `->`.
+     * Space: best  O(n), for skewed binary tree (Any shape), path list takes O(n) space, queue takes O(1) space.
+     *        worst O(nlogn), for full binary tree and complete binary tree, queue need to store path list for each node.
+     *        avg   O(nlogn)
      */
+    private class Node {
+        StringBuilder path;
+        TreeNode node;
+        Node (StringBuilder _path, TreeNode _node) {
+            path = _path;
+            node = _node;
+        }
+    }
     public List<String> binaryTreePaths(TreeNode root) {
         if (root == null) {
             return new ArrayList<>();
         }
         List<String> result = new ArrayList<>();
-        Queue<TreeNode> queue = new ArrayDeque<>();
-        Queue<StringBuilder> paths = new ArrayDeque<>();
-        queue.offer(root);
-        paths.offer(new StringBuilder(Integer.toString(root.val)));
+        Queue<Node> queue = new ArrayDeque<>();
+        queue.offer(new Node(new StringBuilder(), root));
         while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                TreeNode cur = queue.poll();
-                StringBuilder curPath = paths.poll();
-                if (cur.left == null && cur.right == null) {
-                    result.add(curPath.toString());
-                }
-                boolean used = false;
-                int len = curPath.length();
-                if (cur.left != null) {
-                    queue.offer(cur.left);
-                    curPath.append("->").append(cur.left.val);
-                    paths.offer(curPath);
-                    used = true;
-                }
-                if (cur.right != null) {
-                    queue.offer(cur.right);
-                    StringBuilder sb = used ? new StringBuilder(curPath) : curPath;
-                    sb.setLength(len);
-                    sb.append("->").append(cur.right.val);
-                    paths.offer(sb);
-                }
+            Node cur = queue.poll();
+            String prefix = cur.node == root ? "" : "->";
+            cur.path.append(prefix).append(cur.node.val);
+            if (cur.node.left == null && cur.node.right == null) {
+                result.add(cur.path.toString());
+            }
+            boolean used = false;
+            if (cur.node.left != null) {
+                queue.offer(new Node(cur.path, cur.node.left));
+                used = true;
+            }
+            if (cur.node.right != null) {
+                StringBuilder path = used ? new StringBuilder(cur.path) : cur.path;
+                queue.offer(new Node(path, cur.node.right));
             }
         }
         return result;
     }
 
     /**
-     * A bed BFS method, which not re-use `curPath`
+     * BFS Method (which not re-use cur.path, time complexity is even bad, and not GC friendly)
      *
-     * Time: for skewed binary tree (Any shape), time rise up to O(n^2).
-     *       for full binary tree and complete binary tree, operations doubled of previous method.
+     * Base Cases:
+     *     1. cur.node == null; ---> return false; // `null` from an one-child parent node only.
      *
-     * Not GC friendly, and others not change.
+     * General Cases:
+     *     1. cur.node.left == null && cur.node.right == null; ---> result.add(cur.path.toString());
+     *     2. cur.node.left != null || cur.node.right != null; ---> // pass, must pass, this case cannot determine final result.
+     *
+     * Corner Cases:
+     *     1. root == null; ---> // doesn't need to handle, already handled by base cases.
+     *
+     * Time:  best  O(n*(logn)^2), for full binary tree and complete binary tree, assume height is `h`, then for layer `k` it's need
+     *                             `(k/2)*2^k` operations, sum sigma (0, h - 1)((k/2)*2^k) <= (h^2)*(2^h) = n*(logn)^2
+     *        worst O(n^2), for skewed binary tree (Any shape), skewed tree only has one leaf node, for every layer, a new path list been
+     *                      created, `1 + 2 +...+ n` <= `n^2`.
+     *        avg   O(n*(logn)^2)
+     * Space: best  O(n), for skewed binary tree (Any shape), path list takes O(n) space, queue takes O(1) space.
+     *        worst O(nlogn), for full binary tree and complete binary tree, queue need to store path list for each node.
+     *        avg   O(nlogn)
      */
-    public List<String> binaryTreePaths(TreeNode root) {
-        if (root == null) {
-            return new ArrayList<>();
+    private class Node {
+        StringBuilder path;
+        TreeNode node;
+        Node (StringBuilder _path, TreeNode _node) {
+            path = _path;
+            node = _node;
         }
+    }
+    public List<String> binaryTreePaths(TreeNode root) {
         List<String> result = new ArrayList<>();
-        Queue<TreeNode> queue = new ArrayDeque<>();
-        Queue<StringBuilder> paths = new ArrayDeque<>();
-        queue.offer(root);
-        paths.offer(new StringBuilder(Integer.toString(root.val)));
+        Queue<Node> queue = new ArrayDeque<>();
+        queue.offer(new Node(new StringBuilder(), root));
         while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                TreeNode cur = queue.poll();
-                StringBuilder curPath = paths.poll();
-                if (cur.left == null && cur.right == null) {
-                    result.add(curPath.toString());
-                }
-                if (cur.left != null) {
-                    queue.offer(cur.left);
-                    StringBuilder sb = new StringBuilder(curPath);
-                    sb.append("->").append(cur.left.val);
-                    paths.offer(sb);
-                }
-                if (cur.right != null) {
-                    queue.offer(cur.right);
-                    StringBuilder sb = new StringBuilder(curPath);
-                    sb.append("->").append(cur.right.val);
-                    paths.offer(sb);
-                }
+            Node cur = queue.poll();
+            if (cur.node == null) {
+                continue;
             }
+            String prefix = cur.node == root ? "" : "->";
+            cur.path.append(prefix).append(cur.node.val);
+            if (cur.node.left == null && cur.node.right == null) {
+                result.add(cur.path.toString());
+                continue; // a small optimization, not call `null` from leaf node;
+            }
+            queue.offer(new Node(new StringBuilder(cur.path), cur.node.left));
+            queue.offer(new Node(new StringBuilder(cur.path), cur.node.right));
         }
         return result;
     }

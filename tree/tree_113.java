@@ -138,7 +138,6 @@ class Solution113 {
           sum = _sum;
         }
     }
-
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
         List<List<Integer>> result = new ArrayList<>();
         Queue<Node> queue = new ArrayDeque<>();
