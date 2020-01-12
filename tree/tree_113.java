@@ -7,7 +7,7 @@ class Solution113 {
      *
      * Notes:
      *     1. If `sum` is positive and for all nodes, `node.val` is positive, we could use `if (remain < 0) { return; }` do pruning optimization,
-     *        then finally time will less than `n`.
+     *        then finally time complexity will less than `n`.
      *
      * Base Cases:
      *     1. node == null; ---> return false; // case 1: `null` from a leaf node.
@@ -18,7 +18,7 @@ class Solution113 {
      *     3. node.left != null || node.right != null; ---> // pass, must pass, this case cannot determine final result.
      *
      * Corner Cases:
-     *     1. root == null; ---> doesn't need to handle, base cases already handled this case.
+     *     1. root == null; ---> // doesn't need to handle, base cases already handled this case.
      *
      * Time:  O(n), binary tree has `n` nodes, must traverse all nodes to get the final result.
      * Space: best  O(2logn), for height-balanced binary tree, complete binary tree, full binary tree.
@@ -52,38 +52,33 @@ class Solution113 {
      * Time:  O(n)
      * Space: O(nlogn)
      */
-    public List<List<Integer>> pathSum(TreeNode root, int sum) {
-        if (root == null) {
-            return new ArrayList<>();
+    private class Node {
+        List<Integer> path;
+        TreeNode node;
+        int sum;
+        Node (List<Integer> _path, TreeNode _node, int _sum) {
+          path = _path;
+          node = _node;
+          sum = _sum;
         }
+    }
+
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
         List<List<Integer>> result = new ArrayList<>();
-        Queue<List<Integer>> paths = new ArrayDeque<>();
-        Queue<Integer> sums = new ArrayDeque<>();
-        Queue<TreeNode> queue = new ArrayDeque<>();
-        paths.offer(new ArrayList<>(Arrays.asList(root.val)));
-        sums.offer(sum);
-        queue.offer(root);
+        Queue<Node> queue = new ArrayDeque<>();
+        queue.offer(new Node(new ArrayList<>(), root, sum));
         while (!queue.isEmpty()) {
-            TreeNode cur = queue.poll();
-            List<Integer> path = paths.poll();
-            int remain = sums.poll() - cur.val;
-            if (cur.left == null && cur.right == null & remain == 0) {
-                result.add(path);
+            Node cur = queue.poll();
+            if (cur.node == null) {
+                continue;
             }
-            if (cur.left != null) {
-                queue.offer(cur.left);
-                sums.offer(remain);
-                List<Integer> list = new ArrayList<>(path);
-                list.add(cur.left.val);
-                paths.offer(list);
+            cur.path.add(cur.node.val);
+            int remain = cur.sum - cur.node.val;
+            if (cur.node.left == null && cur.node.right == null && remain == 0) {
+                result.add(cur.path);
             }
-            if (cur.right != null) {
-                queue.offer(cur.right);
-                sums.offer(remain);
-                List<Integer> list = new ArrayList<>(path);
-                list.add(cur.right.val);
-                paths.offer(list);
-            }
+            queue.offer(new Node(new ArrayList<>(cur.path), cur.node.left, remain));
+            queue.offer(new Node(new ArrayList<>(cur.path), cur.node.right, remain));
         }
         return result;
     }
