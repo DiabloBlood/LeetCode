@@ -1,8 +1,8 @@
 
 
 
-class Solution250 {
-	/**
+class Solution236 {
+    /**
      * DFS Method
      * 
      * Problem Pitfalls:
