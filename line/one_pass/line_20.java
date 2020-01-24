@@ -1,57 +1,76 @@
 
-/*
-Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
-
-An input string is valid if:
-
-Open brackets must be closed by the same type of brackets.
-Open brackets must be closed in the correct order.
-Note that an empty string is also considered valid.
-
-Example 1:
-
-Input: "()"
-Output: true
-Example 2:
-
-Input: "()[]{}"
-Output: true
-Example 3:
-
-Input: "(]"
-Output: false
-Example 4:
-
-Input: "([)]"
-Output: false
-Example 5:
-
-Input: "{[]}"
-Output: true
-*/
-
-import java.util.ArrayDeque;
-import java.util.Deque;
-
-
-/*
-* Case Analysis:
-* 1. stack.isEmpty() && c in ['(', '[', '{'], stack.push(c)
-* 2. !stack.isEmpty() && c in ['(', '[', '{'], stack.push(c)    Example: ((()))
-* 3. stack.isEmpty() && c in [')', ']', '}'], return false
-* 4. !stack.isEmpty() && c in [')', ']', '}'] && isMatch(stack.peek(), c)), stack.pop()
-* 5. !stack.isEmpty() && c in [')', ']', '}'] && !isMatch(stack.peek(), c)), return false not match only because (] mismatch
-*/
-
 
 
 public class Solution20 {
-
+    /**
+     * Notes:
+     *     1. This method only faster than 98.56% other's code in leetcode.
+     *     2. `stack.pop()` will not influence final `return stack.isEmpty()` result (consider case "(]"),
+     *        since if `!isMatch(stack.pop(), c)`, `false` already returned in advance.
+     *
+     * General Cases:
+     *     1. c == left;                                                  ---> stack.push(c);
+     *     2. c == right && !stack.isEmpty() && isMatch(stack.pop(), c);  ---> continue;
+     *     3. c == right && !stack.isEmpty() && !isMatch(stack.pop(), c); ---> return false;
+     *     4. c == right && stack.isEmpty();                              ---> return false;
+     *
+     * Corner Cases:
+     *     1. s == null; ---> return false; // otherwise `s.length()` will throw `NullPointerException`.
+     *
+     * Time:  best  O(1), like ")))))".
+     *        worst O(n), like "(((((", "((()))", "(((()", etc.
+     *        avg   O(n)
+     * Space: best  O(1), like ")))))", "()()()", etc.
+     *        worst O(n), like "(((((".
+     *        avg   O(n)
+     */
     public boolean isValid(String s) {
         if (s == null) {
             return false;
         }
+        Deque<Character> stack = new ArrayDeque<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '(' || c == '[' || c == '{') {
+                stack.push(c);
+            } else if (!stack.isEmpty() && isMatch(stack.pop(), c)) {
+                continue;
+            } else {
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
 
+    private boolean isMatch(char p, char q) {
+        return p == '(' && q == ')' || p == '[' && q == ']' || p == '{' && q == '}';
+    }
+
+    /**
+     * Notes:
+     *     1. This method only faster than 10.20% other's code in leetcode.
+     *     2. Reason is `stack.peek()` and `stack.pop()` are duplicate calls.
+     *
+     * General Cases:
+     *     1. c == left;                                  ---> stack.push(c);
+     *     2. c == right && !stack.isEmpty() && isMatch;  ---> stack.pop();
+     *     3. c == right && !stack.isEmpty() && !isMatch; ---> return false;
+     *     4. c == right && stack.isEmpty();              ---> return false;
+     *
+     * Corner Cases:
+     *     1. s == null; ---> return false; // otherwise `s.length()` will throw `NullPointerException`.
+     *
+     * Time:  best  O(1), like ")))))".
+     *        worst O(n), like "(((((", "((()))", "(((()", etc.
+     *        avg   O(n)
+     * Space: best  O(1), like ")))))", "()()()", etc.
+     *        worst O(n), like "(((((".
+     *        avg   O(n)
+     */
+    public boolean isValid(String s) {
+        if (s == null) {
+            return false;
+        }
         Deque<Character> stack = new ArrayDeque<>();
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
@@ -60,31 +79,38 @@ public class Solution20 {
             } else if (!stack.isEmpty() && isMatch(stack.peek(), c)) {
                 stack.pop();
             } else {
-                // case 1: '(]'
-                // if not go branch 1, which means c == ')' || c == ']' || c == '}', if stack is empty now, then failed
                 return false;
             }
         }
         return stack.isEmpty();
     }
 
-    private isMatch(char p, char q) {
-        return p == '(' && q == ')' || p == '[' && q == ']' || p == '{' && q == '}'; 
+    private boolean isMatch(char p, char q) {
+        return p == '(' && q == ')' || p == '[' && q == ']' || p == '{' && q == '}';
     }
 
-    // Suppose s only have '(' and ')'
-    /*
-    * Case Analysis:
-    * 1. stack.isEmpty() && c == '('; stack.push(c);
-    * 2. !stack.isEmpty() && c == '('; stack.push(c);    Example: ((()))
-    * 3. stack.isEmpty() && c == ')'; return false;
-    * 4. !stack.isEmpty() && c == ')'; stack.pop()
-    */
-    public boolean isValid2(String s) {
+    /**
+     * Problem: if input only has '(' or ')'.
+     *
+     * General Cases:
+     *     1. c == '(';                     ---> stack.push(c);
+     *     2. c == ')' && !stack.isEmpty(); ---> stack.pop();
+     *     3. c == ')' && stack.isEmpty();  ---> return false;
+     *
+     * Corner Cases:
+     *     1. s == null; ---> return false; // otherwise `s.length()` will throw `NullPointerException`.
+     *
+     * Time:  best  O(1), like ")))))".
+     *        worst O(n), like "(((((", "((()))", "(((()", etc.
+     *        avg   O(n)
+     * Space: best  O(1), like ")))))", "()()()", etc.
+     *        worst O(n), like "(((((".
+     *        avg   O(n)
+     */
+    public boolean isValid(String s) {
         if (s == null) {
             return false;
         }
-
         Deque<Character> stack = new ArrayDeque<>();
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
@@ -99,15 +125,3 @@ public class Solution20 {
         return stack.isEmpty();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
