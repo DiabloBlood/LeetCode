@@ -11,6 +11,20 @@ one pass
 
  */
     /**
+     * Problem Pitfalls:
+     *     1. Input array is not sorted and has duplicates, sort this array could get result in O(n^2).
+     *     2. For input case likes [0, 0, 0, 0, 0], triplet index is (0, 3, 4), others is impossible.
+     *     3. For input case likes [-10, -10, 5, 5, 5, 5], triplet index is (0, 2, 5), others is impossible.
+     *     4. For three pointers i, j, k, if has duplicates, always use the first appeared index as result.
+     *        Otherwise, for input case [0, 0, 0, 0, 0], `i` will finally go to index 3,
+     *        for input case [-10, -10, 5, 5, 5, 5], `j` will go to index 5, `k` will go to index 3,
+     *        finally will not get any result.
+     *
+     * Problem Analysis:
+     *     1. Use condition `i > 0 && nums[i] == nums[i - 1]` to skip duplicate number at `i` position,
+     *        this condition will guarantee always use first appeared duplicate number.
+     *
+     * General Cases:
      * for loop:
      *     1. a >  0; ---> break; // which means a + b + c > 0, since a < b < c.
      *     2. a <= 0; ---> while loop
