@@ -1,54 +1,30 @@
 pending:
-    - 1, 15, 202, 3, 22, 42
+    - 1, 202, 3, 22, 42, 76, 937, 31, 49, 11, 7, 221, 994
+    - 32, 125, 819, 238, 169, 217, 167, 16, 18, 287, 229
+    - 189, 84, 13, 6, 14, 12, 38, 67, 151, 8, 557, 28
 
 finished
-    - 20
+    - 20, 15, 344
 
 one pass
-    - 20
+    - 344, 20
 
+two pass
+    - 15
 
-
- */
     /**
-     * Problem Pitfalls:
-     *     1. Input array is not sorted and has duplicates, sort this array could get result in O(n^2).
-     *     2. For input case likes [0, 0, 0, 0, 0], triplet index is (0, 3, 4), others is impossible.
-     *     3. For input case likes [-10, -10, 5, 5, 5, 5], triplet index is (0, 2, 5), others is impossible.
-     *     4. For three pointers i, j, k, if has duplicates, always use the first appeared index as result.
-     *        Otherwise, for input case [0, 0, 0, 0, 0], `i` will finally go to index 3,
-     *        for input case [-10, -10, 5, 5, 5, 5], `j` will go to index 5, `k` will go to index 3,
-     *        finally will not get any result.
-     *
      * Problem Analysis:
-     *     1. Use condition `i > 0 && nums[i] == nums[i - 1]` to skip duplicate number at `i` position,
-     *        this condition will guarantee always use first appeared duplicate number.
+     *     1.
      *
      * General Cases:
-     * for loop:
-     *     1. a >  0; ---> break; // which means a + b + c > 0, since a < b < c.
-     *     2. a <= 0; ---> while loop
-     *     while loop:
-     *         1. a + b >  0;                   ---> break; // which means a + b + c > 0
-     *         2. a + b <= 0 && a + b + c <  0; ---> j++;
-     *         3. a + b <= 0 && a + b + c >  0; ---> k--;
-     *         4. a + b <= 0 && a + b + c == 0; ---> add triplet
+     *     1.
+     *
+     * Corner Cases:
+     *     1.
+     *
+     * Time:
+     * Space:
      */
-    public List<List<Integer>> threeSum(int[] nums) {
-        Arrays.sort(nums);
-        int n = nums.length;
-        for (int i = 0; i < n - 2; i++) {
-            int j = i + 1;
-            int k = n - 1;
-            while (nums[j] == nums[i]) {
-              j++;
-            }
-            while (j < k) {
-
-            } 
-        }
-    }
-
 
     // dummy.next likes cur
     public void flatten(TreeNode root) {
