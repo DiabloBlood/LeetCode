@@ -12,7 +12,7 @@ class Solution100 {
      *     3. p != null && q == null; ---> return false;
      *     4. p != null && q != null && p.val != q.val; ---> return false;
      *     combine 2, 3, 4:
-     *     2. p == null || q == null || p.val != q.val; ---> return false
+     *     2. p == null || q == null || p.val != q.val; ---> return false;
      *
      * General Cases:
      *     1. p != null && q != null && p.val == q.val && isSame(left) == false && isSame(right) == false;  ---> return false;
@@ -29,7 +29,7 @@ class Solution100 {
      *        worst O(n), binary tree contains `n` nodes.
      * Space: best  O(1), detected `p` and `q` is not same tree at root level.
      *        avg   O(logn), for height-balanced binary tree, complete binary tree, full binary tree.
-     *        worst O(n), for skewed binary tree. (Any shape)
+     *        worst O(n), for skewed binary tree (Any Shape).
      */
     public boolean isSameTree(TreeNode p, TreeNode q) {
         if (p == null && q == null) {

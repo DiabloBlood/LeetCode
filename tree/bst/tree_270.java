@@ -1,7 +1,7 @@
 
 
 
-class Solution700 {
+class Solution270 {
 	/**
      * Problem Analysis:
      *     1. BST property, all nodes of left subtree < root.val, all nodes of right subtree > root.val,
@@ -47,7 +47,7 @@ class Solution700 {
      *        [a, x) x (x, b], if all node value is integer, ranges should like [a, x - 1] x [x + 1, b],
      *        so if abs(target - x) < 0.5, the closest node must be this root.
      *     2. If all node value is float/double, only method above could be used.
-
+     *
      * Time:  best  O(1), now could find result very early, doesn't need to traverse complete path.
      *        best  O(logn), for height-balanced BST, complete BST, full BST. Not traverse all nodes, only traverse a path, branch pruning.
      *        worst O(n), for skewed BST (Any shape).

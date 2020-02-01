@@ -2,6 +2,7 @@
 
 
 class Solution117 {
+    add head prev seperate method
     /**
      * BFS method (queue not used).
      *
