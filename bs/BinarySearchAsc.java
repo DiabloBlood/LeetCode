@@ -118,7 +118,6 @@ class BinarySearchAsc {
         return pos;
     }
 
-
     /**
      * Definition: given an ascending array `nums`, a integer `target`,
      *             find the postion with smallest value such that `f(x) >= target`.
