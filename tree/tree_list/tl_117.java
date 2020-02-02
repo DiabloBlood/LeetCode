@@ -2,9 +2,14 @@
 
 
 class Solution117 {
-    add head prev seperate method
     /**
      * BFS method (queue not used).
+     *
+     * Notes:
+     *     1. `head` as level traversal pointer, which is first node of each level.
+     *     2. `head` as 1st level traversal pointer.
+     *     3. `cur` as 2nd level traversal pointer.
+     *     4. `dummy` as dummy of each level.
      *
      * Problem Analysis:
      *     1. The input tree is not a full binary tree, so we cannot use the solution of tree_106.java.
@@ -40,6 +45,55 @@ class Solution117 {
                     cur = cur.next;
                 }
                 head = head.next;
+            }
+            head = dummy.next;
+            dummy.next = null;
+        }
+        return root;
+    }
+
+    /**
+     * More meaning clear method.
+     *     1. `head` as level traversal pointer, which is first node of each level.
+     *     2. `prev` as 1st level traversal pointer.
+     *     3. `cur` as 2nd level traversal pointer.
+     *     4. `dummy` as dummy of each level.
+     *
+     * Problem Analysis:
+     *     1. The input tree is not a full binary tree, so we cannot use the solution of tree_106.java.
+     *     2. The key point is hold layer 1 and connet layer 2, then switch layer 1 to layer 2, and the next layer of layer 2 becomes to new layer 2.
+     *     3. `head` represents the level head (the leftmost start node) of each level.
+     *     4. `dummy` is the level head of the next layer of the layer which `head` represented.
+     *
+     * General Cases:
+     *     outer while loop:
+     *         1. use `head != null` as condition
+     *     inner while loop:
+     *         1. prev == null; ---> // do nothing
+     *         2. prev != null; ---> connet prev.left or prev.right at the next layer that `cur` represented.
+     *
+     * Corner Cases:
+     *     1. root == null; ---> // doesn't need to handle, return value `root` is null.
+     *
+     * Time:  O(n), binary tree has `n` nodes, the only way to get result is to traverse all the nodes.
+     * Space: O(1), no any extra space been used.
+     */
+    public Node connect(Node root) {
+        Node head = root;
+        Node dummy = new Node(-1);
+        while (head != null) {
+            Node cur = dummy;
+            Node prev = head;
+            while (prev != null) {
+                if (prev.left != null) {
+                    cur.next = prev.left;
+                    cur = cur.next;
+                }
+                if (prev.right != null) {
+                    cur.next = prev.right;
+                    cur = cur.next;
+                }
+                prev = prev.next;
             }
             head = dummy.next;
             dummy.next = null;
