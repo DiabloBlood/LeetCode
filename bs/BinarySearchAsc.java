@@ -1,7 +1,7 @@
 
 
 
-class BinarySearchAsc {
+public class BinarySearchAsc {
     /**
      * Definition: given an ascending array `nums`, an integer `target`,
      *             find the postion with largest value such that `f(x) < target`.

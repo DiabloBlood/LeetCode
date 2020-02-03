@@ -1,8 +1,7 @@
 
 
 
-class BinarySearchDesc {
-
+public class BinarySearchDesc {
     /**
      * Definition: given a descending array `nums`, an integer `target`,
      *             find the position with largest value such that `f(x) < target`.
