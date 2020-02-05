@@ -14,7 +14,7 @@ class Solution367 {
      *        but the real situation is `(long)mid * mid > num`.
      *
      * Corner Cases:
-     *     1. num < 1; ---> return false; // negtive number and `0` doesn't count as perfect square numbers. 
+     *     1. num < 1; ---> return false; // negtive number and `0` doesn't count as perfect square numbers.
      *
      * Time:  O(logn)
      * Space: O(1)
