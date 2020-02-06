@@ -1,5 +1,6 @@
 
 
+
 class Solution69 {
     /**
      * Notes:
