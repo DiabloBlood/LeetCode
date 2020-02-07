@@ -8,6 +8,8 @@ public class Solution278{
      *
      * Problem Analysis:
      *     1. Initialize pos as `-1`, if no first bad version found (which means all versions are good), shoud return `-1`.
+     *     2. Assume input is [0, 0, 0, 0, 1, 1, 1], `0` means isBadVersion return false, `1` means return true, then problem
+     *        likes find smallest position such that `f(x) >= 1`
      *
      * General Cases:
      *     1. isBadVersion(mid);  ---> pos = mid; left = mid + 1; // a potential first bad version found.
