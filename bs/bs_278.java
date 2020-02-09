@@ -1,7 +1,7 @@
 
 
 
-public class Solution278{
+public class Solution278 {
     /**
      * Notes:
      *     1. Please refer to `BinarySearchAsc.bs4` template.
