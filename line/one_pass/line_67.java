@@ -8,8 +8,8 @@ class Solution67 {
      *     2. Similar problems: 2 (Add Two Numbers), 445 (Add Two Numbers II).
      *
      * General Cases:
-     *     1. i <  0 && j <  0; ---> while loop break;
-     *     2. i >= 0 || j >= 0; ---> while loop continue;
+     *     1. i <  0 && j <  0 && carry == 0; ---> while loop break;
+     *     2. i >= 0 || j >= 0 || carry >  0; ---> while loop continue;
      *
      * Corner Cases:
      *     1. a == null || b == null; ---> return a == null ? b : a; 

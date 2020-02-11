@@ -10,8 +10,8 @@ class Solution989 {
      *     4. If A.length > 1, then A[0] != 0     
      *
      * General Cases:
-     *     1. i <  0 && k == 0; ---> while loop break;
-     *     2. i >= 0 || k >  0; ---> while loop continue;
+     *     1. i <  0 && k == 0 && carry == 0; ---> while loop break;
+     *     2. i >= 0 || k >  0 || carry >  0; ---> while loop continue;
      *
      * Time:  O(n), assume A.length is `n`, the operations count of `K` is constant O(1)
      * Space: O(1)
