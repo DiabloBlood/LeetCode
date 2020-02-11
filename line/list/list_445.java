@@ -28,9 +28,9 @@ class Solution445 {
         l2 = reverse(l2);
         int carry = 0;
         while (l1 != null || l2 != null || carry > 0) {
-            int val1 = l1 == null ? 0 : l1.val;
-            int val2 = l2 == null ? 0 : l2.val;
-            int sum = val1 + val2 + carry;
+            int sum = carry;
+            sum += l1 == null ? 0 : l1.val;
+            sum += l2 == null ? 0 : l2.val;
             carry = sum / 10;
             ListNode head = new ListNode(sum % 10);
             head.next = dummy.next;
@@ -70,7 +70,7 @@ class Solution445 {
      *     2. l1 and l2 only one is null; ---> doesn't need to handle.
      *
      * Time:  O(max(m, n)), exactly one pass, `m` and `n` is the length of l1 and l2, respectively.
-     * Space: O(1)
+     * Space: O(m + n)
      */
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         Deque<Integer> s1 = new ArrayDeque<>();
@@ -80,9 +80,9 @@ class Solution445 {
         ListNode dummy = new ListNode(-1);
         int carry = 0;
         while (!s1.isEmpty() || !s2.isEmpty() || carry > 0) {
-            int val1 = s1.isEmpty() ? 0 : s1.pop();
-            int val2 = s2.isEmpty() ? 0 : s2.pop();
-            int sum = val1 + val2 + carry;
+            int sum = carry;
+            sum += s1.isEmpty() ? 0 : s1.pop();
+            sum += s2.isEmpty() ? 0 : s2.pop();
             carry = sum / 10;
             ListNode head = new ListNode(sum % 10);
             head.next = dummy.next;

@@ -8,10 +8,11 @@ public class Solution14 {
      *        `m` is length of target string, `n` is length of source string.
      * 
      * General Cases:
-     *     1. i > s.length() - 1; ---> return sb.toString(); // longest common prefix length is impossible longer than the string
-     *                                                          with shortest length in this input array. If this case takes place,
-     *                                                          which means `s` is the smallest string in input string array.
-     *     2. s.charAt(i) != c;   ---> return sb.toString();
+     *     1. i >= s.length(); ---> return sb.toString(); // longest common prefix length is impossible longer than the string
+     *                                                       with shortest length in this input array. If this case takes place,
+     *                                                       which means `s` is the smallest string in input string array.
+     *     2. i < s.length() && s.charAt(i) != c; ---> return sb.toString();
+     *     3. i < s.length() && s.charAt(i) == c; ---> // do nothing
      *
      * Corner Cases:
      *     1. strs == null;     ---> return ""; // otherwise `int len = strs[0].length();` will throw `NullPointerException`.
@@ -31,7 +32,7 @@ public class Solution14 {
             char c = strs[0].charAt(i);
             for (int j = 1; j < strs.length; j++) {
                 String s = strs[j];
-                if (i > s.length() - 1 || s.charAt(i) != c) {
+                if (i >= s.length() || s.charAt(i) != c) {
                     return sb.toString();
                 }
             }
