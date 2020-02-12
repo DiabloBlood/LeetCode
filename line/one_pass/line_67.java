@@ -5,7 +5,8 @@ class Solution67 {
     /**
      * Notes:
      *     1. The input strings are both non-empty and contains only characters 1 or 0.
-     *     2. Similar problems: 2 (Add Two Numbers), 445 (Add Two Numbers II).
+     *     2. Similar problems: 2 (Add Two Numbers), 445 (Add Two Numbers II), 989 (Add to Array-Form of Integer),
+     *                          415 (Add Strings).
      *
      * General Cases:
      *     1. i <  0 && j <  0 && carry == 0; ---> while loop break;
