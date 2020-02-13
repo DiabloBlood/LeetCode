@@ -8,7 +8,7 @@ Not Forward
 
 finished
     - 20, 15, 344, 67, 14, 989, 415, 66, 202, 459
-    - 189
+    - 189, 186
 
 one pass
     - 344, 20, 67, 989, 415, 66
@@ -19,6 +19,8 @@ two pass
 two pointer
     - left & right, reverse, rotate
         - 189
+    - diff pointer
+        - 186
 
 check cycle
     - 202
