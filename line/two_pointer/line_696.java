@@ -1,7 +1,7 @@
 
 
 
-class Solution696 {
+public class Solution696 {
     /**
      * Problem Analysis:
      *     1. For input "0001111", should has 3 typical substrings, "000111", "0011", "000111", the iput has 3 `0`s and 4 `1`s,

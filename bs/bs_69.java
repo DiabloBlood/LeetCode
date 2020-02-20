@@ -1,7 +1,7 @@
 
 
 
-class Solution69 {
+public class Solution69 {
     /**
      * Notes:
      *     1. Please refer to `BinarySearchAsc.bs2` template.

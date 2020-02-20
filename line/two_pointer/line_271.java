@@ -1,7 +1,7 @@
 
 
 
-class Solution271 {
+public class Solution271 {
     /**
      * Encodes a list of strings to a single string.
      *

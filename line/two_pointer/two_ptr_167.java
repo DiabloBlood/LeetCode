@@ -1,7 +1,7 @@
 
 
 
-class Solution167 {
+public class Solution167 {
     /**
      * Case Analysis:
      *     1. sum == target; ---> return [start + 1, end + 1];
