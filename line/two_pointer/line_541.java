@@ -71,7 +71,7 @@ public class Solution541 {
      *     3. !isPos; ---> sb.append(s.charAt(end--));
      *
      * Corner Cases:
-     *     1. s == null;        ---> return null; // otherwise `s.toCharArray();` will throw `NullPointerException`.
+     *     1. s == null;        ---> return null; // otherwise `int n = s.length();` will throw `NullPointerException`.
      *     2. s.length() == 0;  ---> // doesn't need to handle, return value is an empty string.
      *     3. k <= 0;           ---> throw new IllegalArgumentException(); // which will lead to endless for loop.
      *     4. k > array.length; ---> // doesn't need to handle, [0, array.length - 1] will been reversed.
