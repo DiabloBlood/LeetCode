@@ -7,6 +7,8 @@ Easy problem could use BinarySearchAsc, BinarySearchDesc and BinarySearchFind In
         - 744
     - bs4
         - 278, 35, 153
+    - bs8
+        - 209
 
 Pending
     - 981, 528, 475
