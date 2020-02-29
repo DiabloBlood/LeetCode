@@ -1,7 +1,7 @@
 
 
 
-public class Solution541 {
+public class Solution557 {
     /**
      * Notes:
      *     1. If use string builder could O(3n) solution, but the purpose of this kind of problem is to check

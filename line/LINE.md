@@ -1,7 +1,7 @@
 pending:
     - 1, 3, 22, 42, 76, 937, 31, 49, 11, 7, 221, 994
     - 32, 819, 238, 169, 217, 167, 16, 18, 287, 229
-    - 84, 13, 6, 12, 151, 8
+    - 84, 13, 6, 12, 151, 8, 325, 718, 303, 304
 
 Not Forward
     - 686
@@ -26,11 +26,14 @@ two pointer
         - 209
     - slow & fast pointer, check cycle
         - 202
+    - range sum
+        - 209, 325
 
 hash table
     - set
         - 202
     - map
+        - 325
 
     /**
      * Problem Analysis:
