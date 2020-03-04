@@ -12,7 +12,7 @@ finished
     - 1119, 125, 11, 209, 325, 13
 
 one pass
-    - 344, 20, 67, 989, 415, 66, 1119
+    - 344, 20, 67, 989, 415, 66, 1119, 303
     - map
         - 13
 
@@ -36,6 +36,9 @@ hash table
         - 202
     - map
         - 325, 13
+
+range sum template
+    - 303
 
     /**
      * Problem Analysis:
