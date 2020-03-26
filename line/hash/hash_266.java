@@ -23,8 +23,7 @@ class Solution266 {
         }
         int[] map = new int[128];
         for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            map[c]++;
+            map[s.charAt(i)]++;
         }
         int sum = 0;
         for (int value: map) {
@@ -61,8 +60,7 @@ class Solution266 {
         }
         int[] map = new int[128];
         for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            map[c] ^= 1;
+            map[s.charAt(i)] ^= 1;
         }
         int sum = 0;
         for (int value: map) {
