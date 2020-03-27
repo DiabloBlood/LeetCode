@@ -1,24 +1,30 @@
-/*
-Given an array of strings, group anagrams together.
 
-Example:
 
-Input: ["eat", "tea", "tan", "ate", "nat", "bat"],
-Output:
-[
-  ["ate","eat","tea"],
-  ["nat","tan"],
-  ["bat"]
-]
-*/
 
 public class Solution49 {
-
-    /*
-    * Assume `m` is the average length of s, `n` is the length of string array `strs`
-    * Time Complexity: O((128 + m)*n), since the counting sort is O(m)
-    * Space Complexity: O(128 + m), for StringBuilder usage
-    */
+    /**
+     * Notes:
+     *     1. map.values() return type is a Collection
+     *
+     * Problem Analysis:
+     *     1. Use the sorted alphabetical order string as key to group anagrams.
+     *     2. Use counting sort to sort string.
+     *
+     * General Cases:
+     *     1. !map.containsKey(key); ---> map.put(key, new ArrayList<>()); map.get(key).add(s);
+     *     2. map.containsKey(key);  ---> map.get(key).add(s);
+     *
+     * Corner Cases:
+     *     1. strs == null; ---> return new ArrayList<>(); // otherwise `for (String s: strs)` will throw `NullPointerException`.
+     *     2. strs.length == 0; ---> // doesn't need to handle, will skip for loop and finally return an empty array list.
+     *     3. s == null; ---> // assume every `s` is not null.
+     *
+     * Time:  O(mn), assume `m` is the average length of s, `n` is the length of string array,
+     *                   counting sort takes O(m), for loop is `n` rounds, `new ArrayList<>(map.values());`
+     *                   takes at most `n` (which means has `n` groups of anagrams)
+     * Space: O(m), string takes `m`. (Assume every new string will be collected by GC every for loop round)
+     *              array map seen as constant space.
+     */
     public List<List<String>> groupAnagrams(String[] strs) {
         if (strs == null) {
             return new ArrayList<>();
@@ -35,9 +41,6 @@ public class Solution49 {
     }
 
     private String countingSort(String s) {
-        if (s == null || s == "") {
-            return s;
-        }
         int[] map = new int[128];
         for (int i = 0; i < s.length(); i++) {
             map[s.charAt(i)]++;
@@ -46,26 +49,43 @@ public class Solution49 {
         for (int i = 0; i < map.length; i++) {
             int count = map[i];
             for (int j = 0; j < count; j++) {
-                sb.append(i);
+                sb.append((char)i);
             }
         }
         return sb.toString();
     }
 
-    /*
-    * Assume `m` is the average length of s, `n` is the length of string array `strs`
-    * Time Complexity: O(m*logm*n), since the sort is m*logm
-    * Space Complexity: O(m), for char array usage.
-    */
-    public List<List<String>> groupAnagrams2(String[] strs) {
+
+    /**
+     * Notes:
+     *     1. Build a string from char array, you could use `new String(arr);` or `String.valueOf(arr)`
+     *     2. map.values() return type is a Collection
+     *
+     * Problem Analysis:
+     *     1. Use the sorted alphabetical order string as key to group anagrams.
+     *
+     * General Cases:
+     *     1. !map.containsKey(key); ---> map.put(key, new ArrayList<>()); map.get(key).add(s);
+     *     2. map.containsKey(key);  ---> map.get(key).add(s);
+     *
+     * Corner Cases:
+     *     1. strs == null; ---> return new ArrayList<>(); // otherwise `for (String s: strs)` will throw `NullPointerException`.
+     *     2. strs.length == 0; ---> // doesn't need to handle, will skip for loop and finally return an empty array list.
+     *
+     * Time:  O(mnlogm), assume `m` is the average length of s, `n` is the length of string array,
+     *                   sort takes O(mlogm), for loop is `n` rounds, `new ArrayList<>(map.values());`
+     *                   takes at most `n` (which means has `n` groups of anagrams)
+     * Space: O(m), char array takes `m`. (Assume every new char array will be collected by GC every for loop round)
+     */
+    public List<List<String>> groupAnagrams(String[] strs) {
         if (strs == null) {
             return new ArrayList<>();
         }
         Map<String, List<String>> map = new HashMap<>();
         for (String s: strs) {
-            char[] strArray = s.toCharArray();
-            Arrays.sort(strArray);
-            String key = String.valueOf(strArray);
+            char[] arr = s.toCharArray();
+            Arrays.sort(arr);
+            String key = new String(arr);
             if (!map.containsKey(key)) {
                 map.put(key, new ArrayList<>());
             }
