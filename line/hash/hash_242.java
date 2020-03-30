@@ -14,7 +14,7 @@ class Solution242 {
      *     2. s.length() != t.length(); ---> return false; // otherwise cannot use one for loop traverse two strings.
      *
      * Time:  O(n), best is O(1) if length of 2 strings are different, 1st one pass for loop takes `n`, 2nd for loop is O(1).
-     * Space: O(1), array map is constant space.
+     * Space: O(1), array map takes constant space.
      */
     public boolean isAnagram(String s, String t) {
         if (s == null || t == null || s.length() != t.length()) {

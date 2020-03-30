@@ -14,7 +14,7 @@ finished
     - 459, 189, 186, 38, 696, 271, 443, 345, 541, 557
     - 1119, 125, 11, 209, 325, 13, 303, 12, 1, 3
     - 159, 31, 448, 442, 268, 136, 389, 217, 219, 242
-    - 266, 409, 49
+    - 266, 409, 49, 438
 
 one pass
     - 344, 20, 67, 989, 415, 66, 1119, 303, 268, 389, 136
@@ -46,13 +46,15 @@ hash table
     - array map (index)
         - 448, 442, 12
     - array map (character)
-        - 242, 266, 409, 49, 13, 3
+        - 242, 266, 409, 49, 438, 13, 3
 
-range sum template
-    - 303
-
-bit operation
-    - 268, 389, 136
+special topics
+    - bit operation
+        - 268, 389, 136
+    - range sum
+        - 303
+    - sliding window
+        - 438
 
 
 Some knowledge
