@@ -28,7 +28,8 @@ class Solution438 {
      *           // only recover the count of char `s.charAt(start)` but not recover the total count.
      *
      * Corner Cases:
-     *     1. s == null || p == null;  ---> // otherwise `i < s.length();` or `i < p.length();` will throw `NullPointerException`.
+     *     1. s == null || p == null;  ---> return new ArrayList<>(); // otherwise `i < s.length();` or `i < p.length();` will throw `NullPointerException`.
+     *     2. p.length() == 0;         ---> return new ArrayList<>(); // must be handled, otherwise return value = [0, 0, 0, 0, ...]
      *     2. s.length() < p.length(); ---> // 2nd for loop will run but never build a sliding window with size `p.length()` and
      *                                         finally return an empty array list.
      *
@@ -36,7 +37,7 @@ class Solution438 {
      * Space: O(1), array map takes constant space.
      */
     public List<Integer> findAnagrams(String s, String p) {
-        if (s == null || p == null) {
+        if (s == null || p == null || p.length() == 0) {
             return new ArrayList<>();
         }
         List<Integer> result = new ArrayList<>();
@@ -69,7 +70,7 @@ class Solution438 {
      * Same method with the upper one, but with more concise coding style/format
      */
     public List<Integer> findAnagrams(String s, String p) {
-        if (s == null || p == null) {
+        if (s == null || p == null || p.length() == 0) {
             return new ArrayList<>();
         }
         List<Integer> result = new ArrayList<>();
