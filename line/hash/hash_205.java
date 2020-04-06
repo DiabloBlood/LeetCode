@@ -1,65 +1,41 @@
 
 
 
-class Solution205 {
-    /*
-     * Time:  O(n)
-     * Space: O(1)
-     */
-    // isomorphic means every char the last position is same
-    public boolean isIsomorphic(String s, String t) {
-        if (s == null || t == null || s.length() != t.length()) {
-            return false;
-        }
-        int[] mapS = new int[128];
-        int[] mapT = new int[128];
-
-        for (int i = 0; i < s.length(); i++) {
-            if(mapS[s.charAt(i)] != mapT[t.charAt(i)]) {
-                return false;
-            }
-            mapS[s.charAt(i)] = i + 1;
-            mapT[t.charAt(i)] = i + 1;
-        }
-        return true;
-    }
-
-    // Notes: test case s = "ab", t = "aa", array int[128] default is zero, which will confuse with the index zero
-    /*
-     * Case Analysis:
-     * 1. s[i] == notFound && t[i] != notFound; return false;
-     * 2. s[i] == notFound && t[i] == notFound; s[i] =i; t[i] = i;
-     * 3. s[i] != notFound && t[i] == notFound; return false;
-     * 4. s[i] != notFound && t[i] != notFound && s[i] != t[i]; return false;
-     * 5. s[i] != notFound && t[i] != notFound && s[i] == t[i]; s[i] =i; t[i] = i;
+public class Solution205 {
+    /**
+     * Problem Analysis:
+     *     1. Use two array maps to track index of each character of string s and string t.
+     *     2. For s[i] and t[i], they should have same previous appeared indexes.
+     *
+     * General Cases:
+     *     1. map1[c1] != map2[c2]; ---> return false;
+     *     2. map1[c1] != map2[c2]; ---> map1[c1] = i + 1; map2[c2] = i + 1;
+     *                              // use `1` based index, then doesn't need run Array.fill(map, -1);
+     *
+     * Corner Cases:
+     *     1. s == null || t == null;   ---> return false; // otherwise `i < s.length();` or `char c2 = t.charAt(i);`
+     *                                                        will throw `NullPointerException`.
+     *     2. s.length() != t.length(); ---> return false; // otherwise `char c1 = s.charAt(i);` or `char c2 = t.charAt(i);`
+     *                                                        will throw `StringIndexOutOfBoundsException`.
+     *
+     * Time:  O(n), one pass for loop, best is O(1) is string s and string t have different lengths.
+     * Space: O(1), array map takes constant space.
      */
     public boolean isIsomorphic(String s, String t) {
         if (s == null || t == null || s.length() != t.length()) {
             return false;
         }
-        int[] mapS = new int[128];
-        int[] mapT = new int[128];
-        
-        final notFound = -1;
-        Arrays.fill(mapS, notFound);
-        Arrays.fill(mapT, notFound);
-        
+        int[] map1 = new int[128];
+        int[] map2 = new int[128];
         for (int i = 0; i < s.length(); i++) {
-            if(mapS[s.charAt(i)] != mapT[t.charAt(i)]) {
+            char c1 = s.charAt(i);
+            char c2 = t.charAt(i);
+            if (map1[c1] != map2[c2]) {
                 return false;
             }
-            mapS[s.charAt(i)] = i;
-            mapT[t.charAt(i)] = i;
+            map1[c1] = i + 1;
+            map2[c2] = i + 1;
         }
         return true;
     }
 }
-
-
-
-
-
-
-
-
-
