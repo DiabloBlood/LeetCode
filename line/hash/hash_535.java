@@ -70,7 +70,7 @@ public class Solution535 {
         do {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < 6; i++) {
-                int idx = (int)Math.random() * SEED.length();
+                int idx = (int)(Math.random() * SEED.length());
                 sb.append(SEED.charAt(idx));
             }
             key = sb.toString();
