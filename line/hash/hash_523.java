@@ -30,8 +30,8 @@ public class Solution523 {
      *     2. k == 0; ---> remain = sum; // think input likes [1, 2, 0, 0, 0, 3], will return when loop to index 3.
      *     3. k < 0; ---> // doesn't need to handle, all the sum[0 -> i] still could be grouped by remain.
      *
-     * Time:  O(n), for loop takes `n`
-     * Space: O(n), sums array `n`
+     * Time:  O(n), for loop takes `n`.
+     * Space: O(n), hashmap takes `1 ~ n`.
      */
     public boolean checkSubarraySum(int[] nums, int k) {
         if (nums == null) {
