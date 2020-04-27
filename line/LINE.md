@@ -29,7 +29,7 @@ one pass
         - 13, 12, 1, 442, 217, 219
 
 two pass
-    - 14, 15, 202, 28, 459
+    - 14, 15, 202, 28, 459, 238
     - map
         - 448, 442, 242, 266, 409, 204, 387, 953
 
@@ -69,7 +69,7 @@ special topics
     - bit operation
         - 268, 389, 136
     - range sum
-        - 303, 724, 560, 523, 974
+        - 303, 724, 560, 523, 974, 238(range product)
     - sliding window
         - 438, 567, 76
     - string operations
