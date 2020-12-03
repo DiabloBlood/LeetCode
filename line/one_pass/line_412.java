@@ -5,6 +5,7 @@ class Solution412 {
     /**
      * Notes:
      *     1. When i == 15, string is "FizzBuzz".
+     *     2. String.valueOf will call Integer.toString method.
      *
      * Corner Cases:
      *     1. n < 1; ---> return new ArrayList<>(); // invalid input.
@@ -25,7 +26,7 @@ class Solution412 {
             if (i % 5 == 0) {
                 sb.append("Buzz");
             }
-            String s = sb.length() == 0 ? String.valueOf(i) : sb.toString();
+            String s = sb.length() == 0 ? Integer.toString(i) : sb.toString();
             result.add(s);
         }
         return result;
@@ -63,7 +64,7 @@ class Solution412 {
                     sb.append(rule.str);
                 }
             }
-            String s = sb.length() == 0 ? String.valueOf(i) : sb.toString();
+            String s = sb.length() == 0 ? Integer.toString(i) : sb.toString();
             result.add(s);
         }
         return result;

@@ -22,6 +22,9 @@ public class Solution38 {
      * Space: O(n), the next string builder takes `n`
      */
     public String countAndSay(int n) {
+        if (n < 1) {
+            return "";
+        }
         StringBuilder sb = new StringBuilder("1");
         for (int i = 2; i <= n; i++) {
             int start = 0;

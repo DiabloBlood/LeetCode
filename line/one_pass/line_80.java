@@ -44,6 +44,7 @@ class Solution80 {
         }
         return end;
     }
+
     /**
      * A more concise method.
      *
