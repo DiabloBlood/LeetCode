@@ -23,6 +23,9 @@ public class Solution66 {
      * Space: O(1), worst case is O(n), when all elements of this array is `9`.
      */
     public int[] plusOne(int[] digits) {
+        if (digits == null || digits.length == 0) {
+            return new int[0];
+        }
         for (int i = digits.length - 1; i >= 0; i--) {
             if (digits[i] < 9) {
                 digits[i]++;

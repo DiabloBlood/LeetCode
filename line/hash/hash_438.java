@@ -94,4 +94,34 @@ class Solution438 {
         }
         return result;
     }
+
+    // 2. p.length() == 0;         ---> return new ArrayList<>(); // must be handled, otherwise return value = [0, 0, 0, 0, ...]
+    public List<Integer> findAnagrams(String s, String p) {
+        if (s == null || p == null || p.length() == 0) {
+            return new ArrayList<>();
+        }
+        List<Integer> result = new ArrayList<>();
+        int m = p.length();
+        int count = m;
+        int[] map = new int[128];
+        for (int i = 0; i < m; i++) {
+            map[p.charAt(i)]++;
+        }
+        for (int i = 0; i < s.length(); i++) {
+            if (map[s.charAt(i)] > 0) {
+                count--;
+            }
+            map[s.charAt(i)]--;
+            if (i > m - 1) {
+                map[s.charAt(i - m)]++;
+                if (map[s.charAt(i - m)] > 0) {
+                    count++;
+                }
+            }
+            if (count == 0) {
+                result.add(i - m + 1);
+            }
+        }
+        return result;
+    }
 }

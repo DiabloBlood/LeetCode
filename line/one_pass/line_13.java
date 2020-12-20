@@ -44,4 +44,49 @@ public class Solution13 {
         }
         return result;
     }
+
+    public int romanToInt(String s) {
+        if (s == null) {
+            return 0;
+        }
+        int[] map = new int[128];
+        map['I'] = 1;
+        map['V'] = 5;
+        map['X'] = 10;
+        map['L'] = 50;
+        map['C'] = 100;
+        map['D'] = 500;
+        map['M'] = 1000;
+        int result = 0;
+        int prev = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            int cur = map[s.charAt(i)];
+            result += cur < prev ? -cur : cur;
+            prev = cur;
+        }
+        return result;
+    }
+
+    public int romanToInt(String s) {
+        if (s == null) {
+            return 0;
+        }
+        int[] map = new int[128];
+        map['I'] = 1;
+        map['V'] = 5;
+        map['X'] = 10;
+        map['L'] = 50;
+        map['C'] = 100;
+        map['D'] = 500;
+        map['M'] = 1000;
+        int result = 0;
+        int prev = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int cur = map[s.charAt(i)];
+            result += prev < cur ? -prev : prev;
+            prev = cur;
+        }
+        result += prev;
+        return result;
+    }
 }

@@ -40,7 +40,7 @@ two pointer
     - diff pointer
         - 186, 557, 38, 696, 271, 443, 3, 811, 228
     - sliding window
-        - 209, 159
+        - 209, 159, 438
     - slow & fast pointer, check cycle
         - 202
     - range sum
