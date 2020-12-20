@@ -2,8 +2,19 @@
 
 
 class Solution234 {
-    /*
-     * Time:  O(n), findMid O(n/2), reverse O(n/2), check avg O(n/2)
+    /**
+     * Problem Analysis:
+     *     1. Find the middle node first.
+     *     2. Then reverse the second list.
+     *     3. compare l1 and l2.
+     *
+     * Notes:
+     *     1. `findMid` method details, why `mid.next = null` details, please refer list_143.java.
+     *
+     * Corner Cases:
+     *     1. head == null; ---> return; // must handle, otherwise `findMid` method will throw 'NullPointerExcepition'.
+     *
+     * Time:  O(n), findMid O(n/2), reverse O(n/2), compare avg O(n/2)
      * Space: O(1)
      */
     public boolean isPalindrome(ListNode head) {
@@ -13,17 +24,31 @@ class Solution234 {
         ListNode mid = findMid(head);
         ListNode l2 = reverse(mid.next);
         mid.next = null;
-        return check(head, l2);
+        return compare(head, l2);
     }
-    
-    private boolean check(ListNode l1, ListNode l2) {
+
+    private boolean compare(ListNode l1, ListNode l2) {
+        while (l2 != null) {
+            if (l1.val != l2.val) {
+                return false;
+            }
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+        return true;
+    }
+
+    /**
+     * One more fancy writing of compare method
+     */
+    private boolean compare(ListNode l1, ListNode l2) {
         while (l2 != null && l1.val == l2.val) {
             l1 = l1.next;
             l2 = l2.next;
         }
         return l2 == null;
     }
-    
+
     private ListNode findMid(ListNode head) {
         ListNode slow = head;
         ListNode fast = head;
@@ -33,7 +58,7 @@ class Solution234 {
         }
         return slow;
     }
-    
+
     private ListNode reverse(ListNode head) {
         ListNode prev = null;
         while (head != null) {
