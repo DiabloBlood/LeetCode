@@ -11,7 +11,7 @@ class Solution876 {
      *     2. List length is even number, input `1->2->3->4->5->6->null`, output should be `4->5->6->null`.
      *        Finally ptr `slow` at `4`, ptr `fast` at `null`.
      *
-     * Case Analysis:
+     * General Cases:
      *     1. fast == null || fast.next == null; ---> while loop break.
      *     2. fast != null && fast.next != null; ---> while loop continue. (Use demorgan's law)
      *
@@ -41,12 +41,12 @@ class Solution876 {
      *     2. List length is even number, input `1->2->3->4->5->6->null`, output should be `4->5->6->null`.
      *        Finally ptr `slow` at `3`, ptr `fast` at `5`, `fast.next.next` is `null`.
      *
-     * Case Analysis:
-     *     1. fast.next == null || fast.next.next == null; ---> while loop break.
-     *     2. fast.next != null && fast.next.next != null; ---> while loop continue. (Use demorgan's law)
-     *
      * Problem Pitfalls:
      *     1. return value is not always `slow` when use `findMid` code template.
+     *
+     * General Cases:
+     *     1. fast.next == null || fast.next.next == null; ---> while loop break.
+     *     2. fast.next != null && fast.next.next != null; ---> while loop continue. (Use demorgan's law)
      *
      * Corner Cases:
      *     1. head == null;      ---> need to handle, otherwise `fast.next != null` condition will throw `NullPointerException`.
