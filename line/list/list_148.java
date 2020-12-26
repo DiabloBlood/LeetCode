@@ -3,7 +3,16 @@
 
 class Solution148 {
     /*
-     * Time:  O(1.5 * nlogn), recursive tree has k(logn) levels, every level neen n times merge, n/2 times find middle. 
+     * Standard merge sort method.
+     *
+     * Problem Analysis:
+     *     1. Split list into 2 child lists, recursively merge sort each child list, finally merge these 2 child list.
+     *     2. Time complexity calculation:
+     *         - recursive tree height h = logn
+     *         - each level need `n` times merge, `n/2` times find middle, so each level time complexity is O(n)
+     *         - finally is O(nlogn)
+     *
+     * Time:  O(nlogn)
      * Space: O(1)
      */
     public ListNode sortList(ListNode head) {
@@ -18,9 +27,10 @@ class Solution148 {
             return head;
         }
         ListNode mid = findMid(head);
-        ListNode l2 = mergeSort(mid.next);
+        ListNode midNext = mid.next;
         mid.next = null;
         ListNode l1 = mergeSort(head);
+        ListNode l2 = mergeSort(midNext);
         return merge(l1, l2);
     }
     
@@ -54,7 +64,6 @@ class Solution148 {
 
     /**
      * Quicksort Method.
-     * 
      */
     public ListNode sortList(ListNode head) {
         if (head == null) {
@@ -103,10 +112,3 @@ class Solution148 {
         return l1;
     }
 }
-
-
-
-
-
-
-
