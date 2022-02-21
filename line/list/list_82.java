@@ -8,7 +8,7 @@ class Solution82 {
      *     2. Dummy node must be used, since it may remove `head` node.
      *     3. `cur.next` as compare pointer, since nodes after `cur` may be removed.
      *
-     * Case Analysis:
+     * General Cases:
      *     outer while loop:
      *         1. cur.next == null; ---> while loop break;
      *         2. cur.next != null; ---> while loop continue;
@@ -39,14 +39,14 @@ class Solution82 {
         ListNode cur = dummy;
         dummy.next = head;
         while (cur.next != null) {
-            ListNode last = cur.next;
-            while (last.next != null && last.next.val == cur.next.val) {
+            ListNode last = cur;
+            while (last.next != null && cur.next.val == last.next.val) {
                 last = last.next;
             }
-            if (last == cur.next) {
-                cur = cur.next;
-            } else {
+            if (cur.next != last) {
                 cur.next = last.next;
+            } else {
+                cur = cur.next;
             }
         }
         return dummy.next;

@@ -17,13 +17,13 @@ class Solution328 {
      *        loop 2 end: odd list: `1->3->5->6->null`, ptr `odd` at `5`,  even list: `2->4->6->null`, ptr `even` at `6`.
      *        loop 3 end: loop 3 will break, finally assign `odd.next = evenHead`, then return `head`.
      *
-     * Case Analysis:
+     * General Cases:
      *     1. even == null || even.next == null; ---> while loop break.
      *     2. even != null && even.next != null; ---> while loop continue. (Use demorgan's law)
      *
      * Corner Cases:
      *     1. head == null;      ---> should be handled, otherwise `ListNode even = head.next` will throw `NullPointerException`.
-     *     2. head.next == null; ---> doesn't need to handle.
+     *     2. head.next == null; ---> doesn't need to handle. Initially `even == null`, while loop break, and finally return head.
      *
      * Time:  O(n), exactly one pass.
      * Space: O(1)

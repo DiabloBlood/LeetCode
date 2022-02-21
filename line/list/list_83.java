@@ -9,19 +9,19 @@ class Solution83 {
      * Problem Analysis:
      *     1. Doesn't need to use dummy node, since `head` must not be removed.
      *     2. `cur.next` as compare pointer, since nodes after `cur` may be removed.
-     *     3. `cur` initilize as `head`.
+     *     3. `cur` should initilized as `head`.
      *
-     * Case Analysis:
+     * General Cases:
      *     outer while loop:
      *         1. cur.next == null; ---> while loop break;
      *         2. cur.next != null; ---> while loop continue;
      *     inner if else block:
      *         1. cur.next.val == cur.val; ---> cur.next = cur.next.next;
-     *            remove `cur.next`, but not move `cur` to next node, since next node may be removed.           
-     *         2. cur.next.val == cur.val; ---> cur = cur.next;
+     *            remove `cur.next`, but not move `cur` to next node, since next node may need to be removed again.
+     *         2. cur.next.val != cur.val; ---> cur = cur.next;
      * 
      * Corner Cases:
-     *     1. head == null; ---> must be handled, otherwise while loop condition `cur.next != null` will throw `NullPointerException`.
+     *     1. head == null; ---> return null; // must be handled, otherwise `cur.next != null` condition will throw `NullPointerException`.
      *
      * Time:  O(n), exactly one pass.
      * Space: O(1)

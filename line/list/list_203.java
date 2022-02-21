@@ -7,14 +7,14 @@ class Solution203 {
      *     1. Must use dummy node, since `head` may be removed.
      *     2. `cur.next` as compare pointer, since nodes after `cur` may be removed.
      *
-     * Case Analysis:
+     * General Cases:
      *     outer while loop:
      *         1. cur.next == null; ---> while loop break;
      *         2. cur.next != null; ---> while loop continue;
      *     inner if else block:
      *         1. cur.next.val == val; ---> cur.next = cur.next.next;
-     *            remove `cur.next`, but not move `cur` to next node, since next node may be removed.           
-     *         2. cur.next.val == val; ---> cur = cur.next;
+     *            remove `cur.next`, but not move `cur` to next node, since next node may need to be removed again.
+     *         2. cur.next.val != val; ---> cur = cur.next;
      * 
      * Corner Cases:
      *     1. head == null; ---> doesn't need to handle, return value `dummy.next` is `null`.
