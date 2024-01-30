@@ -23,7 +23,7 @@ public class Solution1 {
      */
     public int[] twoSum(int[] nums, int target) {
         if (nums == null) {
-            return new int[] { -1, -1 };
+            return new int[] {-1, -1};
         }
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
@@ -32,7 +32,7 @@ public class Solution1 {
             }
             map.put(nums[i], i);
         }
-        return new int[] { -1, -1 };
+        return new int[] {-1, -1};
     }
 
     /**

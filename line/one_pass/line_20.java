@@ -95,7 +95,7 @@ public class Solution20 {
      * General Cases:
      *     1. c == '(';                     ---> stack.push(c);
      *     2. c == ')' && !stack.isEmpty(); ---> stack.pop();
-     *     3. c == ')' && stack.isEmpty();  ---> return false;
+     *11     3. c == ')' && stack.isEmpty();  ---> return false;
      *
      * Corner Cases:
      *     1. s == null; ---> return false; // otherwise `s.length()` will throw `NullPointerException`.

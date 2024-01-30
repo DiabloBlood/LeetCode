@@ -13,7 +13,7 @@ public class BinarySearchFindIndex {
      *
      * Notes:
      *     1. Ascending array.
-     *     2. No duplicates is very important.
+     *     2. No duplicates is very important, if have duplicates, not guarantee to find which position.
      *
      * Time:  O(logn)
      * Space: O(1)
@@ -49,7 +49,7 @@ public class BinarySearchFindIndex {
      *
      * Notes:
      *     1. Descending array.
-     *     2. No duplicates is very important.
+     *     2. No duplicates is very important, if have duplicates, not guarantee to find which position.
      *
      * Time:  O(logn)
      * Space: O(1)
