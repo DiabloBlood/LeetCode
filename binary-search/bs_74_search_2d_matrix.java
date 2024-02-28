@@ -37,7 +37,7 @@ class Solution74 {
     }
     /**
      * Problem Pitfalls:
-     *     1. How to handle corner cases matrix == null, matrix = [], matrix =[[]]?
+     *     1. How to handle corner cases matrix == null, matrix = [], matrix = [[]]?
      *
      * Time:  O(logm + logn)
      * Space: O(1)

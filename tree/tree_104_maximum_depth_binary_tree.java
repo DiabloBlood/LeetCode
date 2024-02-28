@@ -6,14 +6,17 @@ class Solution104 {
      * Method based on `depth` definition.
      *
      * Key Points:
-     *     1. The `depth` of a node is the number of edges from the node to the tree's root node. A root node will have a depth of 0.
-     *     2. However, this problem `depth` index start from `1`.
+     *     1. The `depth` of a node is the number of edges from the node to the tree's root node.
+     *     2. The `depth` of root node is 1, but the `index` of the root node is 0.
+     *     3. The helper functions means return the fatest reached index of this node `cur`.
+     *     4. The `null` node have index.
+     *     5. The `maxIndex` of this node is max((leftMaxIndex, rightMaxIndex)
      *
      * Base Cases:
-     *     1. node == null; ---> return; // just return.
+     *     1. node == null; ---> return index; which means the depth of parent level is index
      *
      * Corner Cases:
-     *     1. root == null; ---> doesn't need to handle, return value `result[0]` is `0`.
+     *     1. root == null; ---> doesn't need to handle, return value is `0`.
      *
      * Time:  O(n), binary tree contains `n` nodes.
      * Space: best  O(logn), for height-balanced binary tree, complete binary tree, full binary tree.
@@ -21,18 +24,17 @@ class Solution104 {
      *        avg   O(logn)
      */
     public int maxDepth(TreeNode root) {
-        int[] result = new int[1];
-        helper(result, 1, root);
-        return result[0];
+        return helper(root, 0);
     }
 
-    private void helper(int[] result, int depth, TreeNode node) {
+    private int helper(TreeNode node, int index) {
         if (node == null) {
-            return;
+            return index;
         }
-        result[0] = Math.max(result[0], depth);
-        helper(result, depth + 1, node.left);
-        helper(result, depth + 1, node.right);
+
+        int leftMaxIndex = helper(node.left, index + 1);
+        int rightMaxIndex = helper(node.right, index + 1);
+        return Math.max(leftMaxIndex, rightMaxIndex);
     }
 
     /**

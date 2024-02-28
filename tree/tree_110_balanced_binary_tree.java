@@ -10,59 +10,40 @@ class Solution110 {
      *     A binary tree in which the left and right subtrees of `every node` differ in height by no more than 1.
      *
      * Problem Analysis:
-     *     1. Height of leaf node is `0`, then `null` should be `-1`.
-     *     2. Define `-2` as not valid number, then recursion helper could return `-2` as not valid, other number represents node height.
+     *     1. Depth of a leaf node is `1`, the depth of `null` is `0`.
+     *     2. If the corresponding subtree of a node is not balanced, return `-1`
      *
      * Base Cases:
-     *     1. node == null; ---> return -1; // `null` is either a leaf node's child or a general node's child.
+     *     1. node == null; ---> return -0; // `null` is either a leaf node's child or a general node's child.
      *
      * General Cases:
-     *     1. lh == -2 || rh == -2 || Math.abs(lh - rh) >  1; ---> return -2; // which means this subtree is not balance.
-     *     2. lh >  -2 && rh >  -2 && Math.abs(lh - rh) <= 1; ---> return 1 + Math.max(lh, rh); 
+     *     1. leftDepth == -1 || rightDepth == -1 || Math.abs(leftDepth - rightDepth) >  1; ---> return -1; // which means this subtree is not balance.
+     *     2. leftDepth != -1 && rightDepth == -1 && Math.abs(leftDepth - rightDepth) <= 1; Math.max(leftDepth, rightDepth) + 1; 
      *        // Demorgan's law of case 1. which means this subtree is a balanced tree.
      *
      * Corner Cases:
-     *     1. root == null; ---> doesn't need to handle, return value `helper(root) != -2` will be true.
+     *     1. root == null; ---> doesn't need to handle, return value `helper(root) != -1` will be true.
      *
      * Time:  O(n), binary tree contains `n` nodes.
      * Space: best  O(logn), for height-balanced binary tree, complete binary tree, full binary tree.
      *        worst O(n), for skewed binary tree.
      */
     public boolean isBalanced(TreeNode root) {
-        return helper(root) != -2;
+        return helper(root) != -1;
     }
 
     private int helper(TreeNode node) {
         if (node == null) {
+            return 0;
+        }
+
+        int leftDepth = helper(node.left);
+        int rightDepth = helper(node.right);
+
+        if (leftDepth == -1 || rightDepth == -1 || Math.abs(leftDepth - rightDepth) > 1) {
             return -1;
         }
-        int lh = helper(node.left);
-        int rh = helper(node.right);
-        if (lh == -2 || rh == -2 || Math.abs(lh - rh) > 1) {
-            return -2;
-        }
-        return 1 + Math.max(lh, rh);
-    }
-
-    /**
-     * Use a final int variable replace -2 and represent the not balance meaning.
-     */
-    private final int NOT_VALID = -2;
-
-    public boolean isBalanced(TreeNode root) {
-        return helper(root) != NOT_VALID;
-    }
-
-    private int helper(TreeNode node) {
-        if (node == null) {
-            return -1;
-        }
-        int lh = helper(node.left);
-        int rh = helper(node.right);
-        if (lh == NOT_VALID || rh == NOT_VALID || Math.abs(lh - rh) > 1) {
-            return NOT_VALID;
-        }
-        return 1 + Math.max(lh, rh);
+        return Math.max(leftDepth, rightDepth) + 1;
     }
 
     /**
